@@ -40,8 +40,18 @@ if (isset($_GET["question_id"])) {
     <h1>
         <?php echo $question["title"]; ?>
     </h1>
-    <!-- navigate to the edit page -->
-    <a href="edit_question.php?question_id=<?php echo $question_id; ?>" class="edit-button">Edit Question</a>
+    <?php if (isOwner($question['user_id']) || isAdmin()): ?>
+        <form method="post" onsubmit="return confirm('Are you sure you want to delete this question?');"
+            action="delete_question.php">
+            <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
+            <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
+            <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
+            <input type="submit" name="delete_question" value="Delete Question">
+        </form>
+        <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>">
+            Edit Question
+        </a>
+    <?php endif; ?>
 
     <p>
         <?php echo $question["content"]; ?>
