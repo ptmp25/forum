@@ -79,10 +79,10 @@ function fetchQuestion($db, $question_id)
 function fetchRepliesForQuestion($db, $question_id)
 {
     try {
-        $replies_query = "SELECT replies.reply_content AS reply_content, users.username AS replied_by
-                        FROM replies 
-                        JOIN users ON replies.user_id = users.user_id
-                        WHERE replies.question_id = :question_id";
+        $replies_query = "SELECT replies.*, users.username AS replied_by
+                  FROM replies 
+                  JOIN users ON replies.user_id = users.user_id
+                  WHERE replies.question_id = :question_id";
         $stmt = $db->prepare($replies_query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->execute();
@@ -114,10 +114,6 @@ function deleteQuestion($db, $question_id)
     } catch (PDOException $e) {
         return false;
     }
-}
-
-if (isset($_POST['edit_question_btn'])) {
-    saveEditedQuestion($db);
 }
 
 function saveEditedQuestion($db)
@@ -160,7 +156,7 @@ function saveEditedQuestion($db)
             header("Location: ../questions/read_question.php?question_id=$question_id");
             exit();
         } else {
-            echo "Error creating the question.";
+            echo "Error.";
         }
     } else {
         echo "Please fill in both title and content fields.";

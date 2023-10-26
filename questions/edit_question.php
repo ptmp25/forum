@@ -4,19 +4,23 @@ require dirname(__DIR__) . '/questions/question_functions.php';
 
 $question_id = $_GET['question_id'];
 $question = fetchQuestion($db, $question_id);
+if (!$question) {
+    echo "Question not found.";
+}
 $user_id = $question['user_id'];
+$module_id = $question['module_id'];
 
 // Check if the user is the owner of the question or an admin
 if (isOwner($user_id) || isAdmin()) {
-    // Fetch the existing question data for editing
-    $question = fetchQuestion($db, $question_id);
-
-    if (!$question) {
-        echo "Question not found.";
-    }
+    
 } else {
     echo "You are not authorized to edit this question.";
 }
+
+if (isset($_POST['edit_question_btn'])) {
+    saveEditedQuestion($db);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +64,7 @@ if (isOwner($user_id) || isAdmin()) {
         <br>
         <input type="submit" name="edit_question_btn" value="Post Question">
     </form>
+    <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">Back to Module</a>
 </body>
 
 </html>

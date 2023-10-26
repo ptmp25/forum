@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . "../questions/question_functions.php";
+require dirname(__DIR__) . "../replies/reply_functions.php";
 
 if (!isLoggedIn()) {
     $_SESSION['msg'] = "You must log in first";
@@ -46,7 +46,7 @@ if (isset($_GET["question_id"])) {
             <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
             <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
             <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
-            <input type="submit" name="delete_question" value="Delete Question">
+            <input type="submit" name="delete_question_btn" value="Delete Question">
         </form>
         <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>">
             Edit Question
@@ -74,6 +74,18 @@ if (isset($_GET["question_id"])) {
                 <p>
                     <?php echo $reply['reply_content']; ?>
                 </p>
+                <?php if (isOwner($reply['user_id']) || isAdmin()): ?>
+                    <form method="post" onsubmit="return confirm('Are you sure you want to delete this reply?');"
+                        action="../replies/delete_reply.php">
+                        <input type="hidden" name="reply_id" value="<?= $reply['reply_id'] ?>">
+                        <input type="hidden" name="user_id" value="<?= $reply['user_id'] ?>">
+                        <input type="hidden" name="question_id" value="<?= $reply['question_id'] ?>">
+                        <input type="submit" name="delete_reply_btn" value="Delete reply">
+                    </form>
+                    <a href="../replies/edit_reply.php?reply_id=<?php echo $reply["reply_id"]; ?>">
+                        Edit reply
+                    </a>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>
