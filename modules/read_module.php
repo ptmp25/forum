@@ -17,6 +17,7 @@ if (isset($_GET["module_id"])) {
     echo "Invalid module ID" . isset($_GET["module_id"]);
     exit();
 }
+include(dirname(__DIR__). "/templates/header.php");
 
 ?>
 <!DOCTYPE html>

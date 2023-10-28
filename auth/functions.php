@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 try {
@@ -139,7 +140,7 @@ function uploadProfilePicture($file)
 function getUserById($id)
 {
     global $db;
-    $query = "SELECT * FROM users WHERE id = :id";
+    $query = "SELECT * FROM users WHERE user_id = :id";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();

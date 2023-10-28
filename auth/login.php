@@ -9,7 +9,7 @@ if (isset($_POST['login_btn'])) {
 <html>
 
 <head>
-    <title>Registration system PHP and MySQL</title>
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 

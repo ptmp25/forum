@@ -7,7 +7,9 @@ if (!isLoggedIn()) {
 
 $modules = getModules($db);
 
+include( __DIR__ ."/templates/header.php");
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -39,9 +41,11 @@ $modules = getModules($db);
 
             <div>
                 <?php if (isset($_SESSION['user'])): ?>
-                    <strong>
-                        <?php echo $_SESSION['user']['username']; ?>
-                    </strong>
+                    <a href="user/profile.php?user_id=<?php echo $_SESSION['user']['user_id'];?>">
+                        <strong>
+                            <?php echo $_SESSION['user']['username']; ?>
+                        </strong>
+                    </a>
 
                     <small>
                         <i style="color: #888;">(
