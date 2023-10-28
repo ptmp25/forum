@@ -12,10 +12,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create New Topic</title>
+    <title>Create New Module</title>
 </head>
 <body>
-    <h1>Create New Topic</h1>
+    <h1>Create New Module</h1>
     
     <form method="post" action="">
         <label for="module_name">Module name:</label>
