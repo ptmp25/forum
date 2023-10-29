@@ -132,8 +132,8 @@ function uploadProfilePicture($file)
             return null;
         }
     } else {
-        array_push($errors, "No file uploaded or an error occurred during upload.");
-        return null;
+        // Return the default profile picture path
+        return "../img/default_profile_img.png";
     }
 }
 

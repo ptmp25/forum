@@ -6,8 +6,6 @@ if (!isLoggedIn()) {
 }
 
 $modules = getModules($db);
-
-include( __DIR__ ."/templates/header.php");
 ?>
 
 <!DOCTYPE html>

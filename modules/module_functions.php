@@ -4,6 +4,7 @@ if (!isLoggedIn()) {
     $_SESSION['msg'] = "You must log in first";
     header("Location: ../auth/login.php");
 }
+include(dirname(__DIR__) . "/templates/header.php");
 
 function getModules($db)
 {

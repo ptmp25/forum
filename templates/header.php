@@ -1,5 +1,5 @@
 <?php
-define("APPURL", "http://localhost:80/forum-1");
+define("APPURL", "http://localhost:80/forum");
 define("ROOTPATH", dirname(__DIR__));
 ?>
 <!DOCTYPE html>
@@ -25,12 +25,15 @@ define("ROOTPATH", dirname(__DIR__));
                     <li class="nav-item active">
                         <a class="nav-link" href="../index.php">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Members</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="<?php echo dirname(__DIR__); ?>/emails/create_email.php">Contact us</a> -->
+                        <a class="nav-link" href="<?php echo APPURL; ?>/emails/create_email.php">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="<?php echo dirname(__DIR__);?>/emails/create_email.php">Contact us</a> -->
-                        <a class="nav-link" href="<?php echo APPURL;?>/emails/create_email.php">Contact us</a>
+                        <a class="nav-link" href="<?php echo APPURL; ?>/user/profile.php?user_id=<?php echo $_SESSION['user']['user_id']?>">Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo APPURL; ?>/index.php?logout='1">Logout</a>
