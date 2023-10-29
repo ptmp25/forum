@@ -1,43 +1,52 @@
-<?php require  __DIR__ . '../functions.php'; ?>
+<?php require __DIR__ . '../functions.php'; ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-        <title>Registration system PHP and MySQL</title>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-<div class="header">
-        <h2>Register</h2>
-</div>
-<form method="post" action="register.php"  enctype="multipart/form-data">
-    <!-- show error message  -->
-        <?php echo display_error(); ?> 
-        <?php echo display_success(); ?> 
-        <div class="input-group">
-                <label>Username</label>
-                <input type="text" name="username" value="<?php echo $username; ?> ">
+    <form method="post" action="register.php" enctype="multipart/form-data">
+        <!-- show error message  -->
+        <?php echo display_error(); ?>
+        <?php echo display_success(); ?>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Register</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="register.php" enctype="multipart/form-data">
+                        <!-- show error message  -->
+                        <?php echo display_error(); ?>
+                        <?php echo display_success(); ?>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" value="<?php echo $email; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_1">Password</label>
+                            <input type="password" class="form-control" name="password_1">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_2">Confirm password</label>
+                            <input type="password" class="form-control" name="password_2">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" name="register_btn">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-                <label>Email</label>
-                <input type="email" name="email" value="<?php echo $email;?>">
-        </div>
-        <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password_1">
-        </div>
-        <div class="input-group">
-                <label>Confirm password</label>
-                <input type="password" name="password_2">
-        </div>
-        <div class="input-group">
-                <label>Profile Picture:</label>
-                <input type="file" name="profile_picture" accept="image/*">
-        </div>
-        <div class="input-group">
-                <button type="submit" class="btn" name="register_btn">Register</button>
-        </div>
-        <p>
-                Already a member? <a href="login.php">Sign in</a>
-        </p>
-</form>
+    </form>
 </body>
+
 </html>

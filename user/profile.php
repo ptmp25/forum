@@ -3,7 +3,7 @@ require dirname(__DIR__) . "../auth/functions.php";
 
 if (!isLoggedIn()) {
     $_SESSION['msg'] = "You must log in first";
-    header("Location: ../auth/login.php");
+    header("Location: $APPURL/auth/login.php");
 }
 
 $user_id = $_GET['user_id'];
@@ -21,6 +21,5 @@ $user = getUserById($user_id);
 <body>
     <?php echo $user['user_id'];?>
     <?php echo $user['username'];?>
-    <?php echo $user['user_'];?>
 </body>
 </html>
