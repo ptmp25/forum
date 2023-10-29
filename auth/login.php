@@ -10,31 +10,35 @@ if (isset($_POST['login_btn'])) {
 
 <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-    <div class="header">
-        <h2>Login</h2>
-    </div>
     <form method="post" action="login.php">
 
-        <?php echo display_error(); ?>
-
-        <div class="input-group">
-            <label>Username</label>
-            <input type="text" name="username">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">Login</div>
+                <?php echo display_error(); ?>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" name="login_btn" class="btn btn-primary">Login</button>
+                    </form>
+                    <p>
+                        Not yet a member? <a href="register.php">Sign up</a>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-            <label>Password</label>
-            <input type="password" name="password">
-        </div>
-        <div class="input-group">
-            <button type="submit" class="btn" name="login_btn">Login</button>
-        </div>
-        <p>
-            Not yet a member? <a href="register.php">Sign up</a>
-        </p>
     </form>
 </body>
 

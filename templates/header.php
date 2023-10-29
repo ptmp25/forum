@@ -33,7 +33,7 @@ define("ROOTPATH", dirname(__DIR__));
                         <a class="nav-link" href="<?php echo APPURL;?>/emails/create_email.php">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="<?php echo APPURL; ?>/index.php?logout='1">Logout</a>
                     </li>
                 </ul>
             </div>

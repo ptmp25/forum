@@ -19,12 +19,9 @@ include( __DIR__ ."/templates/header.php");
 </head>
 
 <body>
-    <div class="header">
-        <h2>Home Page</h2>
-    </div>
     <div class="content">
         <!-- notification message -->
-        <?php if (isset($_SESSION['success'])): ?>
+        <!-- <?php if (isset($_SESSION['success'])): ?>
             <div class="error success">
                 <h3>
                     <?php
@@ -33,7 +30,7 @@ include( __DIR__ ."/templates/header.php");
                     ?>
                 </h3>
             </div>
-        <?php endif ?>
+        <?php endif ?> -->
 
         <!-- logged in user information -->
         <div class="profile_info">
