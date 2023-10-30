@@ -84,7 +84,24 @@ function fetchQuestion($db, $question_id)
         return false;
     }
 }
+function fetchQuestionByUserId($db, $user_id)
+{
+    try {
+        $question_query = "SELECT * FROM questions WHERE user_id = :user_id";
+        $stmt = $db->prepare($question_query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
 
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false; // No questions found for this user
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 function fetchRepliesForQuestion($db, $question_id)
 {
     try {
