@@ -33,7 +33,7 @@ if ($_GET['module_id']) {
             </div>
             <div class="form-group">
                 <label for="image_url">Upload Image:</label>
-                <input type="file" name="image_url" accept="image/*" class="form-control-file">
+                <input type="file" name="image_url[]" accept="image/*" class="form-control-file" multiple>
             </div>
             <?php
             $query = "SELECT module_id, module_name FROM modules";
