@@ -15,12 +15,13 @@ function processNewQuestion($db)
 
     $image_url = ''; // Initialize the image URL
 
-    if (isset($_FILES['image_url']) && !empty($_FILES['image_url']['name'][0])) {
+    if (isset($_FILES['image_url']) && is_array($_FILES['image_url']['name'])) {
         $image_dir = '../img/question_img/';
         $image_urls = array();
+        $max_image_count = 3; // Set your desired maximum number of images here
 
         foreach ($_FILES['image_url']['name'] as $key => $name) {
-            if ($_FILES['image_url']['error'][$key] === UPLOAD_ERR_OK) {
+            if ($key < $max_image_count && $_FILES['image_url']['error'][$key] === UPLOAD_ERR_OK) {
                 $image_temp = $_FILES['image_url']['tmp_name'][$key];
 
                 $timestamp = time();
