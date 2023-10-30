@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+$APPURL = "http://localhost/forum/";
 try {
     // Connect to the database using PDO
     $db = new PDO('mysql:host=localhost;dbname=forum_db', 'root', '');
@@ -29,6 +29,7 @@ function register()
     $email = e($_POST['email']);
     $password_1 = e($_POST['password_1']);
     $password_2 = e($_POST['password_2']);
+    $about = e($_POST['about']);
     $profile_picture = uploadProfilePicture($_FILES['profile_picture']); // Handle file upload
 
     if (isset($_POST['role'])) {
@@ -85,13 +86,15 @@ function register()
         }
 
         if (count($errors) == 0) {
-            $query = "INSERT INTO users (username, email, role, password, profile_picture) VALUES(:username, :email, :role, :password, :profile_picture)";
+            $query = "INSERT INTO users (username, email, role, password, profile_picture, about) 
+                    VALUES(:username, :email, :role, :password, :profile_picture, :about)";
             $stmt = $db->prepare($query);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':role', $role);
             $stmt->bindParam(':password', $password);
             $stmt->bindParam(':profile_picture', $profile_picture);
+            $stmt->bindParam(':about', $about);
             $stmt->execute();
 
             $_SESSION['success'] = "New user successfully created!!";
@@ -133,7 +136,7 @@ function uploadProfilePicture($file)
         }
     } else {
         // Return the default profile picture path
-        return "../img/default_profile_img.png";
+        return "../img/profile_img/default_profile_img.png";
     }
 }
 
@@ -194,6 +197,11 @@ if (isset($_GET['logout'])) {
     header("Location: ../auth/login.php");
 }
 
+function logout(){
+    session_destroy();
+    unset($_SESSION['user']);
+    header("Location: ../auth/login.php");
+}
 // Call the login() function if login_btn is clicked
 if (isset($_POST['login_btn'])) {
     login();

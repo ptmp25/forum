@@ -22,7 +22,7 @@ $APPURL = "http://localhost:80/forum";
             <div class="navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Home</a>
+                        <a class="nav-link" href="<?php echo $APPURL; ?>/index.php">Home</a>
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $APPURL; ?>/emails/create_email.php">Contact us</a>

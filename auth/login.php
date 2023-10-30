@@ -1,5 +1,9 @@
 <?php require __DIR__ . '../functions.php';
 
+if (isLoggedIn()) {
+    header("Location: $APPURL/index.php");
+}
+
 if (isset($_POST['login_btn'])) {
     login();
 }
