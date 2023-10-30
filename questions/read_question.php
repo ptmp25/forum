@@ -70,7 +70,14 @@ if (isset($_GET["question_id"])) {
                     <?php echo $question["content"]; ?>
                 </p>
                 <?php if (!empty($question['image_url'])): ?>
-                    <img src="<?php echo $question['image_url']; ?>" alt="Question Image" class="img-fluid">
+                    <div class="image-container">
+                        
+                        <?php 
+                        $images = explode(",", $question["image_url"]);
+                        foreach ($images as $image): ?>
+                            <img src="<?php echo $image; ?>" alt="Question Image" class="img-fluid">
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>

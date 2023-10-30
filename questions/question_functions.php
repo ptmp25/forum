@@ -15,22 +15,30 @@ function processNewQuestion($db)
 
     $image_url = ''; // Initialize the image URL
 
-    if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
+    if (isset($_FILES['image_url']) && !empty($_FILES['image_url']['name'][0])) {
         $image_dir = '../img/question_img/';
-        $image_name = $_FILES['image_url']['name'];
-        $image_temp = $_FILES['image_url']['tmp_name'];
+        $image_urls = array();
 
-        $timestamp = time();
-        $image_name = $timestamp . '_' . $image_name;
+        foreach ($_FILES['image_url']['name'] as $key => $name) {
+            if ($_FILES['image_url']['error'][$key] === UPLOAD_ERR_OK) {
+                $image_temp = $_FILES['image_url']['tmp_name'][$key];
 
-        $image_url = $image_dir . $image_name;
+                $timestamp = time();
+                $image_name = $timestamp . '_' . $name;
 
-        if (move_uploaded_file($image_temp, $image_url)) {
-            // Image uploaded successfully
-        } else {
-            echo "Error: Failed to move the uploaded image.";
-            exit();
+                $image_url = $image_dir . $image_name;
+
+                if (move_uploaded_file($image_temp, $image_url)) {
+                    // Image uploaded successfully
+                    $image_urls[] = $image_url;
+                } else {
+                    echo "Error: Failed to move the uploaded image.";
+                    exit();
+                }
+            }
         }
+
+        $image_url = implode(',', $image_urls);
     }
 
     if ($title && $content) {
