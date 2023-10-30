@@ -118,3 +118,10 @@ a {
     display: flex;
     justify-content: left;
 }
+
+.page-name p {
+    font-size: 18px;
+    text-align: justify;
+    width: 75%;
+    margin: 10px auto;
+}

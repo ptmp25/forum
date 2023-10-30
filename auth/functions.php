@@ -194,6 +194,11 @@ if (isset($_GET['logout'])) {
     header("Location: ../auth/login.php");
 }
 
+function logout(){
+    session_destroy();
+    unset($_SESSION['user']);
+    header("Location: ../auth/login.php");
+}
 // Call the login() function if login_btn is clicked
 if (isset($_POST['login_btn'])) {
     login();

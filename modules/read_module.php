@@ -36,6 +36,9 @@ if (isset($_GET["module_id"])) {
         <h1>
             <?php echo $module["module_name"]; ?>
         </h1>
+        <p>
+            <?php echo $module["description"]; ?>
+        </p>
     </div>
 
     <div class="list">

@@ -8,7 +8,7 @@ include(dirname(__DIR__) . "/templates/header.php");
 
 function getModules($db)
 {
-    $query = "SELECT module_id, module_name FROM modules";
+    $query = "SELECT * FROM modules";
     $stmt = $db->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -74,6 +74,36 @@ function createNewModule()
             exit();
         } else {
             echo "Error creating the module.";
+        }
+    } else {
+        echo "Please fill in module name field.";
+    }
+}
+
+if (isset($_POST["edit_module_btn"])) {
+    editModule();
+}
+
+function editModule(){
+    global $db;
+
+    $module_id = $_POST["module_id"];
+    $module_name = $_POST["module_name"];
+    $description = $_POST["description"];
+
+    if ($module_name) {
+        // Update the module in the 'modules' table
+        $query = "UPDATE modules SET module_name = :module_name, description = :description WHERE module_id = :module_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':module_name', $module_name);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':module_id', $module_id);
+
+        if ($stmt->execute()) {
+            header("Location: ../modules/read_module.php?module_id=" .  $module_id); // Redirect to the homepage after creating the module
+            exit();
+        } else {
+            echo "Error editing the module.";
         }
     } else {
         echo "Please fill in module name field.";

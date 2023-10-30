@@ -102,9 +102,11 @@ function isOwner($user_id)
     }
 }
 
-
+// if (isset($_POST["delete_question_btn"]))
 function deleteQuestion($db, $question_id)
 {
+    $question_id = $_POST['question_id'];
+    // echo  $question_id;
     try {
         // Delete the question from the 'questions' table
         $query = "DELETE FROM questions WHERE question_id = :question_id";

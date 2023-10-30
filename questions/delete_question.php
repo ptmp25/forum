@@ -2,7 +2,7 @@
 // Include your database connection code here
 require dirname(__DIR__) . '/questions/question_functions.php';
 
-if (isset($_POST['delete_question'])) {
+if (isset($_POST["delete_question_btn"])) {
     // Get the question ID and module ID from the POST request
     $question_id = $_POST['question_id'];
     $module_id = $_POST['module_id'];
