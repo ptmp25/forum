@@ -60,7 +60,7 @@ function processNewQuestion($db)
 function fetchQuestion($db, $question_id)
 {
     try {
-        $question_query = "SELECT * FROM questions WHERE question_id = :question_id";
+        $question_query = "SELECT questions.*, users.username AS post_by FROM questions JOIN users ON questions.user_id = users.user_id WHERE questions.question_id =:question_id;";
         $stmt = $db->prepare($question_query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->execute();
