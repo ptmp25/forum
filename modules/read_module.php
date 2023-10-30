@@ -65,6 +65,11 @@ if (isset($_GET["module_id"])) {
                     <a href="../modules/edit_module.php?module_id=<?php echo $module['module_id']; ?>">Edit Module</a>
                 </button>
             </div>
+            <div class="text-center">
+                <button class="btn btn-primary">
+                    <a href="../modules/delete_module.php?module_id=<?php echo $module['module_id']; ?>">Delete Module</a>
+                </button>
+            </div>
         <?php endif; ?>
     </div>
 </body>
