@@ -1,6 +1,5 @@
 <?php
-define("APPURL", "http://localhost:80/forum");
-define("ROOTPATH", dirname(__DIR__));
+$APPURL = "http://localhost:80/forum";
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,7 +8,7 @@ define("ROOTPATH", dirname(__DIR__));
     <title>My Forum</title>
     <!-- link bootstrap framework  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href=""> -->
+    <link rel="stylesheet" type="text/css" href="<?php echo $APPURL; ?>/css/style.css">
 </head>
 
 <body>
@@ -22,21 +21,18 @@ define("ROOTPATH", dirname(__DIR__));
             </button> -->
             <div class="navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../index.php">Home</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Members</a>
-                    </li> -->
+                    </li> 
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="<?php echo dirname(__DIR__); ?>/emails/create_email.php">Contact us</a> -->
-                        <a class="nav-link" href="<?php echo APPURL; ?>/emails/create_email.php">Contact us</a>
+                        <a class="nav-link" href="<?php echo $APPURL; ?>/emails/create_email.php">Contact us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo APPURL; ?>/user/profile.php?user_id=<?php echo $_SESSION['user']['user_id']?>">Account</a>
+                        <a class="nav-link"
+                            href="<?php echo $APPURL; ?>/user/profile.php?user_id=<?php echo $_SESSION['user']['user_id'] ?>">My Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo APPURL; ?>/index.php?logout='1">Logout</a>
+                        <a class="nav-link" href="<?php echo $APPURL; ?>/index.php?logout='1">Logout</a>
                     </li>
                 </ul>
             </div>

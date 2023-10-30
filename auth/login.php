@@ -31,7 +31,9 @@ if (isset($_POST['login_btn'])) {
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
-                        <button type="submit" name="login_btn" class="btn btn-primary text-center">Login</button>
+                        <div class="form-group text-center">
+                            <button type="submit" name="login_btn" class="btn btn-primary text-center">Login</button>
+                        </div>
                     </form>
                     <p>
                         Not yet a member? <a href="register.php">Sign up</a>

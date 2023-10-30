@@ -13,59 +13,41 @@ $modules = getModules($db);
 
 <head>
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <div class="content">
-        <!-- notification message -->
-        <!-- <?php if (isset($_SESSION['success'])): ?>
-            <div class="error success">
-                <h3>
-                    <?php
-                    echo $_SESSION['success'];
-                    unset($_SESSION['success']);
-                    ?>
-                </h3>
-            </div>
-        <?php endif ?> -->
 
         <!-- logged in user information -->
         <div class="profile_info">
-            <img src="images/user_profile.png">
-
             <div>
                 <?php if (isset($_SESSION['user'])): ?>
-                    <a href="user/profile.php?user_id=<?php echo $_SESSION['user']['user_id'];?>">
+                    <div class="page-name">
                         <strong>
+                            Welcome,
                             <?php echo $_SESSION['user']['username']; ?>
                         </strong>
-                    </a>
-
-                    <small>
-                        <i style="color: #888;">(
-                            <?php echo ucfirst($_SESSION['user']['role']); ?>)
-                        </i>
-                        <br>
-                        <a href="index.php?logout='1'" style="color: red;">logout</a>
-                    </small>
-                    <?php 
-                    if (isAdmin()){
-                        echo "<a href='modules/create_module.php'>Create New Module</a><br>";
-                    }
-                    ?>
-                    <a href="questions/create_question.php?module_id=">Create New Question</a><br>
-                <?php endif ?>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <?php foreach ($modules as $module): ?>
-            <li>
+            <div class="text-center">
+                <button class="btn btn-primary">
+                    <a href="questions/create_question.php?module_id=">Create New Question</a>
+                </button>
+            </div>
+        <?php endif ?>
+        <div class="list">
+            <?php foreach ($modules as $module): ?>
                 <a href="modules/read_module.php?module_id=<?php echo $module['module_id']; ?>">
-                    <?php echo $module['module_name']; ?>
+                    <li>
+                        <?php echo $module['module_name']; ?>
+                    </li>
                 </a>
-            </li>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php if (isAdmin()) {
+            echo "<div class=\"text-center\"><button class=\"btn btn-primary\"><a href='modules/create_module.php'>Create New Module</a><br></button></div>";
+        } ?>
     </div>
 </body>
 

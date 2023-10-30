@@ -21,25 +21,49 @@ if (isset($_GET["module_id"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $module["module_name"]; ?></title>
+    <title>
+        <?php echo $module["module_name"]; ?>
+    </title>
     <!-- <title><?php echo $module_id; ?></title> -->
 </head>
+
 <body>
-    
-    <ul>
-        <?php foreach ($questions as $question): ?>
-            <li>
+    <div class="page-name">
+        <h1>
+            <?php echo $module["module_name"]; ?>
+        </h1>
+    </div>
+
+    <div class="list">
+        <ul>
+            <?php foreach ($questions as $question): ?>
                 <a href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
-                    <?php echo $question["title"]; ?>
+                    <li>
+                        <?php echo $question["title"]; ?>
+                    </li>
                 </a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-    <a href="../questions/create_question.php?module_id=<?php echo $module['module_id']; ?>"> Create question</a>
-    <a href="../index.php">Back to Homepage</a>
-    <!-- <a href="../index.php?logout='1'" style="color: red;">logout</a> -->
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="d-flex try">
+        <div class="text-center">
+            <button class="btn btn-primary">
+                <a href="../questions/create_question.php?module_id=<?php echo $module['module_id']; ?>">Create New
+                    Question</a>
+            </button>
+        </div>
+        <?php if (isAdmin()): ?>
+            <div class="text-center">
+                <button class="btn btn-primary">
+                    <a href="../modules/edit_module.php?module_id=<?php echo $module['module_id']; ?>">Edit Module</a>
+                </button>
+            </div>
+        <?php endif; ?>
+    </div>
 </body>
+
 </html>

@@ -1,9 +1,5 @@
 <?php
-require '../auth/functions.php';
-
-if (!isLoggedIn()) {
-    header("Location: ../auth/login.php");
-}
+require dirname(__DIR__) . "../modules/module_functions.php";
 
 if (isset($_POST["send_email_btn"])) {
     sendEmail();

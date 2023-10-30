@@ -32,16 +32,24 @@ if (isset($_POST['edit_question_btn'])) {
 </head>
 
 <body>
-    <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="user_id" value="<?= $user_id?>">
-        <input type="hidden" name="question_id" value="<?= $question_id?>">
-        <input type="hidden" name="reply_id" value="<?php echo $reply_id; ?>">
-        <label for="reply_content">Reply Content:</label>
-        <textarea name="reply_content" rows="4" required><?php echo $reply['reply_content']; ?></textarea>
-        <br>
-        <input type="submit" name="edit_question_btn" value="Save Edit">
-    </form>
-    
+    <div class="page-name">
+        <h1>
+            Edit Reply
+        </h1>
+    </div>
+    <div class="content-box container">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="user_id" value="<?= $user_id ?>">
+            <input type="hidden" name="question_id" value="<?= $question_id ?>">
+            <input type="hidden" name="reply_id" value="<?php echo $reply_id; ?>">
+            <div class="form-group">
+                <label for="reply_content">Reply Content:</label>
+                <textarea name="reply_content" rows="4" class="form-control-file" required><?php echo $reply['reply_content']; ?></textarea>
+            </div>
+            <input type="submit" name="edit_question_btn" class="btn btn-primary" value="Save Edit">
+        </form>
+    </div>
+
 </body>
 
 </html>
