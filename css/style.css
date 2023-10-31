@@ -135,7 +135,7 @@ a {
 }
 
 .list li {
-    width: 100%;
+    width: 75%;
     border: none;
 }
 
@@ -145,4 +145,13 @@ a {
 
 .card{
     margin: 15px 10px;
+}
+
+.table {
+    width: 75%;
+    margin: 10px auto;
+}
+
+form .btn {
+    border: none;
 }

@@ -34,6 +34,12 @@ $APPURL = "http://localhost:80/forum";
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $APPURL; ?>/index.php?logout='1">Logout</a>
                     </li>
+                    <?php
+                    if ($_SESSION['user']['role'] == 'admin') {
+                        echo "<li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"$APPURL/admin/home.php\">Admin</a>";
+                    }
+                    ?>
                 </ul>
             </div>
         </nav>

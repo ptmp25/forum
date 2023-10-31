@@ -29,6 +29,7 @@ $questions = fetchQuestionByUserId($db, $user_id);
                     <h5 class="card-title">
                         <?php echo $user['username']; ?>
                     </h5>
+                    <p><em>(<?php echo $user['role']; ?>)</em></p>
                     <p class="card-text">Email: <em>
                             <?php echo $user['email']; ?>
                         </em></p>
@@ -49,14 +50,16 @@ $questions = fetchQuestionByUserId($db, $user_id);
                     <h5 class="card-title">Questions</h5>
                     <div class="list">
                         <ul>
-                            <?php foreach ($questions as $question): ?>
-                                <a
-                                    href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
-                                    <li>
-                                        <?php echo $question["title"]; ?>
-                                    </li>
-                                </a>
-                            <?php endforeach; ?>
+                            <?php
+                            if ($questions)
+                                foreach ($questions as $question): ?>
+                                    <a
+                                        href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
+                                        <li>
+                                            <?php echo $question["title"]; ?>
+                                        </li>
+                                    </a>
+                                <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

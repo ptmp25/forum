@@ -45,7 +45,7 @@ if (isset($_GET["module_id"])) {
         <ul>
             <?php foreach ($questions as $question): ?>
                 <a href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
-                    <li>
+                    <li style="width: 75%;">
                         <?php echo $question["title"]; ?>
                     </li>
                 </a>
@@ -66,9 +66,11 @@ if (isset($_GET["module_id"])) {
                 </button>
             </div>
             <div class="text-center">
-                <button class="btn btn-primary">
-                    <a href="../modules/delete_module.php?module_id=<?php echo $module['module_id']; ?>">Delete Module</a>
+                <form action="../modules/delete_module.php" method="post" onsubmit="return confirm('Are you sure you want to delete this question?');">
+                <input type="hidden" name="module_id" value="<?php echo $module['module_id'];?>">
+                <button type="submit" class="btn btn-primary" name ="delete_module_btn">Delete Module
                 </button>
+                </form>
             </div>
         <?php endif; ?>
     </div>
