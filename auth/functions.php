@@ -29,8 +29,12 @@ function register()
     $email = e($_POST['email']);
     $password_1 = e($_POST['password_1']);
     $password_2 = e($_POST['password_2']);
-    $about = e($_POST['about']);
-    $profile_picture = uploadProfilePicture($_FILES['profile_picture']); // Handle file upload
+    if (isset($_POST['about'])) {
+        $role = e($_POST['about']);
+    }
+    if (isset($_FILES['profile_picture'])) {
+        $profile_picture = uploadProfilePicture($_FILES['profile_picture']); // Handle file upload
+    }
 
     if (isset($_POST['role'])) {
         $role = e($_POST['role']);

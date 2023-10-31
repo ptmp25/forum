@@ -37,7 +37,7 @@ $APPURL = "http://localhost:80/forum";
                     <?php
                     if ($_SESSION['user']['role'] == 'admin') {
                         echo "<li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"$APPURL/admin/home.php\">Admin</a>";
+                        <a class=\"nav-link\" href=\"$APPURL/admin/home.php\">Admin Panel</a>";
                     }
                     ?>
                 </ul>

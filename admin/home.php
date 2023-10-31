@@ -23,6 +23,11 @@ $stmt->execute();
     <div class="page-name">
         <h1>Admin - Home Page</h1>
     </div>
+    <div class="text-center">
+        <button class="btn btn-primary">
+            <a href="../admin/accounts.php">Accounts Control</a>
+        </button>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -48,8 +53,9 @@ $stmt->execute();
                         <?php echo $email['timestamp']; ?>
                     </td>
                     <td>
-                        <form method="post" action="../emails/delete_message.php?message_id=<?php echo $email['message_id']; ?>">
-                            <input type="hidden" name="message_id" value=<?php echo $email['message_id'];?> >
+                        <form method="post"
+                            action="../emails/delete_message.php?message_id=<?php echo $email['message_id']; ?>">
+                            <input type="hidden" name="message_id" value=<?php echo $email['message_id']; ?>>
                             <button type="submit" class="btn">Delete</button>
                         </form>
                     </td>

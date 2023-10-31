@@ -54,7 +54,7 @@ if (isLoggedIn()) {
                         <button type="submit" class="btn btn-primary register_btn" name="register_btn">Register</button>
                     </div>
                     <p>
-                        Already a member? <a href="login.php">Sign in</a>
+                        Already a member? <a href="login.php">Log in</a>
                     </p>
             </form>
         </div>
