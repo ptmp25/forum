@@ -155,3 +155,7 @@ a {
 form .btn {
     border: none;
 }
+
+img {
+    width: 100%;
+}
