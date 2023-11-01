@@ -37,9 +37,9 @@ if (isset($_GET["question_id"])) {
 </head>
 
 <body>
-    <div class="back-btn">
+    <!-- <div class="back-btn">
         <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">Back to Module</a>
-    </div>
+    </div> -->
 
     <div class="page-name">
         <h1>
@@ -54,14 +54,23 @@ if (isset($_GET["question_id"])) {
                     <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
                     <button type="submit" name="delete_question_btn" class="btn">Delete Question</button>
                 </form>
-                <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>" class = "btn">Edit Question</a>
+                <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
+                    class="btn">Edit Question</a>
             <?php endif; ?>
         </div>
     </div>
     <div class="content-box container">
         <p>
+            <strong>Module name:</strong>
+            <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">
+                <?php echo $question["module"]; ?>
+            </a>
+        </p>
+        <p>
             <strong>Posted by:</strong>
-            <?php echo $question['post_by']; ?> on
+            <a href="../user/profile.php?user_id=<?php echo $question['user_id']; ?>">
+                <?php echo $question['post_by']; ?>
+            </a> on
             <?php echo $question['timestamp']; ?>
         </p>
         <div class="card mt-3">
@@ -71,8 +80,8 @@ if (isset($_GET["question_id"])) {
                 </p>
                 <?php if (!empty($question['image_url'])): ?>
                     <div class="image-container">
-                        
-                        <?php 
+
+                        <?php
                         $images = explode(",", $question["image_url"]);
                         foreach ($images as $image): ?>
                             <img src="<?php echo $image; ?>" alt="Question Image" class="img-fluid">
@@ -88,7 +97,9 @@ if (isset($_GET["question_id"])) {
                 <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                         <p class="mb-1"><em> By:
-                                <?php echo $reply['replied_by']; ?> on
+                                <a href="../user/profile.php?user_id=<?php echo $reply['user_id']; ?>">
+                                    <?php echo $reply['replied_by']; ?>
+                                </a> on
                                 <?php echo $reply['timestamp']; ?>
                             </em></p>
                     </div>

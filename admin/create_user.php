@@ -30,6 +30,7 @@ include(dirname(__DIR__) . "/templates/header.php");
             <div class="card-body">
 
                 <?php echo display_error(); ?>
+                <?php echo display_succeed(); ?>
 
                 <div class="form-group">
                     <label>Username</label>

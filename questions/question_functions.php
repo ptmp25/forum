@@ -69,7 +69,13 @@ function processNewQuestion($db)
 function fetchQuestion($db, $question_id)
 {
     try {
-        $question_query = "SELECT questions.*, users.username AS post_by FROM questions JOIN users ON questions.user_id = users.user_id WHERE questions.question_id =:question_id;";
+        $question_query = "SELECT questions.*, 
+        users.username AS post_by, 
+        modules.module_name AS module
+        FROM questions
+        JOIN users ON questions.user_id = users.user_id 
+        JOIN modules ON questions.module_id = modules.module_id
+        WHERE questions.question_id =:question_id;";
         $stmt = $db->prepare($question_query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->execute();
@@ -173,7 +179,9 @@ function saveEditedQuestion($db)
 
     if ($editedTitle && $editedContent) {
         // Update the question in the 'questions' table
-        $query = "UPDATE questions SET title = :editedTitle, content = :editedContent, module_id = :module_id WHERE question_id = :question_id";
+        $query = "UPDATE questions 
+                SET title = :editedTitle, content = :editedContent, module_id = :module_id 
+                WHERE question_id = :question_id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->bindParam(':editedTitle', $editedTitle);
@@ -188,5 +196,19 @@ function saveEditedQuestion($db)
         }
     } else {
         echo "Please fill in both title and content fields.";
+    }
+}
+
+function countQuestionsByUserId($db, $user_id)
+{
+    try {
+        $query = "SELECT COUNT(*) FROM questions WHERE user_id = :user_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
     }
 }
