@@ -29,8 +29,6 @@ if (isset($_GET["question_id"])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?php echo $question["title"]; ?>
     </title>
@@ -62,15 +60,19 @@ if (isset($_GET["question_id"])) {
     <div class="content-box container">
         <p>
             <strong>Module name:</strong>
-            <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">
-                <?php echo $question["module"]; ?>
+            <em>
+                <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">
+                    <?php echo $question["module"]; ?>
+            </em>
             </a>
         </p>
         <p>
             <strong>Posted by:</strong>
+            <em>
             <a href="../user/profile.php?user_id=<?php echo $question['user_id']; ?>">
                 <?php echo $question['post_by']; ?>
-            </a> on
+            
+            </a></em> on
             <?php echo $question['timestamp']; ?>
         </p>
         <div class="card mt-3">

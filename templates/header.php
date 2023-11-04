@@ -5,7 +5,7 @@ $APPURL = "http://localhost:80/forum";
 <html>
 
 <head>
-    <title>My Forum</title>
+    <title>Forum</title>
     <!-- link bootstrap framework  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $APPURL; ?>/css/style.css">

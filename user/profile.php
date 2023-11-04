@@ -39,6 +39,13 @@ $questions = fetchQuestionByUserId($db, $user_id);
                     <p class="card-text">
                         Email: <em><?php echo $user['email']; ?></em>
                     </p>
+                    <p class="card-text">
+                        Replies: <?php
+                        $stmt = $db->prepare("SELECT COUNT(*) FROM replies WHERE user_id = ?");
+                        $stmt->execute([$user_id]);
+                        echo $stmt->fetchColumn();
+                         ?>
+                    </p>
                 </div>
             </div>
         </div>

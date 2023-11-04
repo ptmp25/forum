@@ -23,8 +23,6 @@ if (isset($_GET["module_id"])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?php echo $module["module_name"]; ?>
     </title>
