@@ -55,7 +55,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td>
                         <form method="post" action="../auth/delete_user.php?user_id=<?php echo $user['user_id']; ?>">
                             <input type="hidden" name="user_id" value=<?php echo $user['user_id']; ?>>
-                            <button type="submit" class="btn" name="delete_user_btn">Delete</button>
+                            <button type="submit" class="btn btn-danger" name="delete_user_btn">Delete</button>
                         </form>
                     </td>
                 </tr>

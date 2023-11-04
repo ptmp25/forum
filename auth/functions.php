@@ -229,7 +229,7 @@ if (isset($_POST['login_btn'])) {
 function login()
 {
     global $db, $username, $errors;
-
+    $errors = array();
     // Grab form values
     $username = e($_POST['username']);
     $password = e($_POST['password']);

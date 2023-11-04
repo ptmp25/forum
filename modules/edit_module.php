@@ -56,7 +56,7 @@ if (isset($_GET["module_id"])) {
                     cols="50"><?php echo $module["description"]; ?></textarea><br>
             </div>
 
-            <input type="submit" name="edit_module_btn" value="Save" class="btn btn-primary text-center">
+            <input type="submit" name="edit_module_btn" value="Save" class="btn text-center">
         </form>
     </div>
     <hr>
@@ -73,7 +73,7 @@ if (isset($_GET["module_id"])) {
                                 <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
                                 <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
                                 <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
-                                <button type="submit" name="delete_question_btn" class="btn">Delete Question</button>
+                                <button type="submit" name="delete_question_btn" class="btn btn-danger">Delete Question</button>
                             </form>
                             <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
                                 class="btn">Edit Question</a>

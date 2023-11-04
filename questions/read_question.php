@@ -50,7 +50,7 @@ if (isset($_GET["question_id"])) {
                     <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
                     <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
                     <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
-                    <button type="submit" name="delete_question_btn" class="btn">Delete Question</button>
+                    <button type="submit" name="delete_question_btn" class="btn btn-danger">Delete Question</button>
                 </form>
                 <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
                     class="btn">Edit Question</a>
@@ -115,7 +115,7 @@ if (isset($_GET["question_id"])) {
                                 <input type="hidden" name="reply_id" value="<?= $reply['reply_id'] ?>">
                                 <input type="hidden" name="user_id" value="<?= $reply['user_id'] ?>">
                                 <input type="hidden" name="question_id" value="<?= $reply['question_id'] ?>">
-                                <button type="submit" class="btn" name="delete_reply_btn">Delete reply</button>
+                                <button type="submit" class="btn btn-danger" name="delete_reply_btn">Delete reply</button>
                             </form>
                             <a href="../replies/edit_reply.php?reply_id=<?php echo $reply["reply_id"]; ?>" class="btn">Edit
                                 reply</a>
@@ -132,7 +132,7 @@ if (isset($_GET["question_id"])) {
             <div class="form-group">
                 <textarea name="reply_content" rows="4" cols="50" class="form-control" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Post Reply</button>
+            <button type="submit" class="btn" name="submit">Post Reply</button>
         </form>
     </div>
 
