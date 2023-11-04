@@ -132,6 +132,14 @@ if (isset($_POST['edit_profile_btn'])) {
                         <label for="password_2">Confirm password</label>
                         <input type="password" class="form-control" name="password_2">
                     </div> -->
+                    <?php if (isAdmin()): ?>
+                        <label for="role">User type</label>
+                        <select name="role" id="role" class="form-control">
+                            <option value=""></option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    <?php endif; ?>
                     <div class="form-group">
                         <label for="about">About</label>
                         <textarea type="password" class="form-control"

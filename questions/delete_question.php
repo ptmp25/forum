@@ -13,7 +13,8 @@ if (isset($_POST["delete_question_btn"])) {
         // Call a function to delete the question (implement this function)
         if (deleteQuestion($db, $question_id)) {
             // Question deleted successfully, you can redirect to a success page
-            header("Location: ../questions/delete_succeed.php?module_id={$module_id}");
+            // header("Location: ../questions/delete_succeed.php?module_id={$module_id}");
+            header("Location: ../modules/read_module.php?module_id={$module_id}");
             exit();
         } else {
             echo "Error deleting the question.";

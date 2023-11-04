@@ -47,7 +47,15 @@ $stmt->execute();
                         <?php echo $email['message_subject']; ?>
                     </td>
                     <td>
-                        <?php echo $email['message']; ?>
+                        <?php
+                        $message = $email['message'];
+                        if (strlen($message) > 100) {
+                            $short_message = substr($message, 0, 100) . '...';
+                            echo $short_message . '<a href="../emails/read_email.php?message_id=' . $email['message_id'] . '">See more</a>';
+                        } else {
+                            echo $message;
+                        }
+                        ?>
                     </td>
                     <td>
                         <?php echo $email['timestamp']; ?>
