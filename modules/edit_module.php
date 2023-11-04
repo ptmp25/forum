@@ -56,9 +56,11 @@ if (isset($_GET["module_id"])) {
                     cols="50"><?php echo $module["description"]; ?></textarea><br>
             </div>
 
-            <input type="submit" name="edit_module_btn" value="Save" class="btn btn-primary text-center">
+            <input type="submit" name="edit_module_btn" value="Save" class="btn text-center">
         </form>
     </div>
+    <hr>
+    
     <div class="list">
         <ul>
             <?php foreach ($questions as $question): ?>
@@ -71,7 +73,7 @@ if (isset($_GET["module_id"])) {
                                 <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
                                 <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
                                 <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
-                                <button type="submit" name="delete_question_btn" class="btn">Delete Question</button>
+                                <button type="submit" name="delete_question_btn" class="btn btn-danger">Delete Question</button>
                             </form>
                             <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
                                 class="btn">Edit Question</a>
@@ -80,21 +82,6 @@ if (isset($_GET["module_id"])) {
                 </a>
             <?php endforeach; ?>
         </ul>
-    </div>
-    <div class="d-flex try">
-        <div class="text-center">
-            <button class="btn btn-primary">
-                <a href="../questions/create_question.php?module_id=<?php echo $module['module_id']; ?>">Create New
-                    Question</a>
-            </button>
-        </div>
-        <?php if (isAdmin()): ?>
-            <div class="text-center">
-                <button class="btn btn-primary">
-                    <a href="../modules/edit_module.php?module_id=<?php echo $module['module_id']; ?>">Edit Module</a>
-                </button>
-            </div>
-        <?php endif; ?>
     </div>
 </body>
 

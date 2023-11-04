@@ -1,4 +1,5 @@
-<?php require __DIR__ . '../functions.php';
+<?php 
+require __DIR__ . '../functions.php';
 
 if (isLoggedIn()) {
     header("Location: $APPURL/index.php");
@@ -36,7 +37,7 @@ if (isset($_POST['login_btn'])) {
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" name="login_btn" class="btn btn-primary text-center">Login</button>
+                            <button type="submit" name="login_btn" class="btn text-center">Login</button>
                         </div>
                     </form>
                     <p>

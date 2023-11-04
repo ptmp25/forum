@@ -32,7 +32,7 @@ if ($_GET['module_id']) {
                 <textarea name="content" rows="4" class="form-control" required></textarea>
             </div>
             <div class="form-group">
-                <label for="image_url">Upload Image:</label>
+                <label for="image_url">Upload Image: <em>(only accept 3 image)</em></label>
                 <input type="file" name="image_url[]" accept="image/*" class="form-control-file" multiple>
             </div>
             <?php

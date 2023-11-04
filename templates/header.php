@@ -5,16 +5,16 @@ $APPURL = "http://localhost:80/forum";
 <html>
 
 <head>
-    <title>My Forum</title>
+    <title>Forum</title>
     <!-- link bootstrap framework  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $APPURL; ?>/css/style.css">
 </head>
 
 <body>
-    <header class="bg-dark">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#">Forum Website</a>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="<?php echo $APPURL; ?>/index.php">Greenwich Forum</a>
             <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,12 @@ $APPURL = "http://localhost:80/forum";
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $APPURL; ?>/index.php?logout='1">Logout</a>
                     </li>
+                    <?php
+                    if ($_SESSION['user']['role'] == 'admin') {
+                        echo "<li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"$APPURL/admin/home.php\">Admin Panel</a>";
+                    }
+                    ?>
                 </ul>
             </div>
         </nav>

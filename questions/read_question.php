@@ -29,17 +29,15 @@ if (isset($_GET["question_id"])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?php echo $question["title"]; ?>
     </title>
 </head>
 
 <body>
-    <div class="back-btn">
+    <!-- <div class="back-btn">
         <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">Back to Module</a>
-    </div>
+    </div> -->
 
     <div class="page-name">
         <h1>
@@ -52,16 +50,29 @@ if (isset($_GET["question_id"])) {
                     <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
                     <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
                     <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
-                    <button type="submit" name="delete_question_btn" class="btn">Delete Question</button>
+                    <button type="submit" name="delete_question_btn" class="btn btn-danger">Delete Question</button>
                 </form>
-                <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>" class = "btn">Edit Question</a>
+                <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
+                    class="btn">Edit Question</a>
             <?php endif; ?>
         </div>
     </div>
     <div class="content-box container">
         <p>
+            <strong>Module name:</strong>
+            <em>
+                <a href="../modules/read_module.php?module_id=<?php echo $question['module_id']; ?>">
+                    <?php echo $question["module"]; ?>
+            </em>
+            </a>
+        </p>
+        <p>
             <strong>Posted by:</strong>
-            <?php echo $question['post_by']; ?> on
+            <em>
+            <a href="../user/profile.php?user_id=<?php echo $question['user_id']; ?>">
+                <?php echo $question['post_by']; ?>
+            
+            </a></em> on
             <?php echo $question['timestamp']; ?>
         </p>
         <div class="card mt-3">
@@ -71,8 +82,8 @@ if (isset($_GET["question_id"])) {
                 </p>
                 <?php if (!empty($question['image_url'])): ?>
                     <div class="image-container">
-                        
-                        <?php 
+
+                        <?php
                         $images = explode(",", $question["image_url"]);
                         foreach ($images as $image): ?>
                             <img src="<?php echo $image; ?>" alt="Question Image" class="img-fluid">
@@ -88,7 +99,9 @@ if (isset($_GET["question_id"])) {
                 <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                         <p class="mb-1"><em> By:
-                                <?php echo $reply['replied_by']; ?> on
+                                <a href="../user/profile.php?user_id=<?php echo $reply['user_id']; ?>">
+                                    <?php echo $reply['replied_by']; ?>
+                                </a> on
                                 <?php echo $reply['timestamp']; ?>
                             </em></p>
                     </div>
@@ -102,7 +115,7 @@ if (isset($_GET["question_id"])) {
                                 <input type="hidden" name="reply_id" value="<?= $reply['reply_id'] ?>">
                                 <input type="hidden" name="user_id" value="<?= $reply['user_id'] ?>">
                                 <input type="hidden" name="question_id" value="<?= $reply['question_id'] ?>">
-                                <button type="submit" class="btn" name="delete_reply_btn">Delete reply</button>
+                                <button type="submit" class="btn btn-danger" name="delete_reply_btn">Delete reply</button>
                             </form>
                             <a href="../replies/edit_reply.php?reply_id=<?php echo $reply["reply_id"]; ?>" class="btn">Edit
                                 reply</a>
@@ -119,7 +132,7 @@ if (isset($_GET["question_id"])) {
             <div class="form-group">
                 <textarea name="reply_content" rows="4" cols="50" class="form-control" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Post Reply</button>
+            <button type="submit" class="btn" name="submit">Post Reply</button>
         </form>
     </div>
 

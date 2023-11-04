@@ -109,3 +109,28 @@ function editModule(){
         echo "Please fill in module name field.";
     }
 }
+
+
+function deleteModule($module_id){
+    global $db;
+
+    // $module_id = $_POST["module_id"];
+
+    // Delete the module from the 'modules' table
+    $query = "DELETE FROM modules WHERE module_id = :module_id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':module_id', $module_id);
+
+    if ($stmt->execute()) {
+        // Delete the questions related to the module from the 'questions' table
+        $query = "DELETE FROM questions WHERE module_id = :module_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':module_id', $module_id);
+        $stmt->execute();
+
+        header("Location: ../index.php"); // Redirect to the homepage after deleting the module
+        exit();
+    } else {
+        echo "Error deleting the module.";
+    }
+}

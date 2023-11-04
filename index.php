@@ -31,7 +31,7 @@ $modules = getModules($db);
                 </div>
             </div>
             <div class="text-center">
-                <button class="btn btn-primary">
+                <button class="btn ">
                     <a href="questions/create_question.php?module_id=">Create New Question</a>
                 </button>
             </div>
@@ -46,7 +46,7 @@ $modules = getModules($db);
             <?php endforeach; ?>
         </div>
         <?php if (isAdmin()) {
-            echo "<div class=\"text-center\"><button class=\"btn btn-primary\"><a href='modules/create_module.php'>Create New Module</a><br></button></div>";
+            echo "<div class=\"text-center\"><button class=\"btn \"><a href='modules/create_module.php'>Create New Module</a><br></button></div>";
         } ?>
     </div>
 </body>

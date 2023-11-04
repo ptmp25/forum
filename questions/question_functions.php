@@ -15,12 +15,13 @@ function processNewQuestion($db)
 
     $image_url = ''; // Initialize the image URL
 
-    if (isset($_FILES['image_url']) && !empty($_FILES['image_url']['name'][0])) {
+    if (isset($_FILES['image_url']) && is_array($_FILES['image_url']['name'])) {
         $image_dir = '../img/question_img/';
         $image_urls = array();
+        $max_image_count = 3; // Set your desired maximum number of images here
 
         foreach ($_FILES['image_url']['name'] as $key => $name) {
-            if ($_FILES['image_url']['error'][$key] === UPLOAD_ERR_OK) {
+            if ($key < $max_image_count && $_FILES['image_url']['error'][$key] === UPLOAD_ERR_OK) {
                 $image_temp = $_FILES['image_url']['tmp_name'][$key];
 
                 $timestamp = time();
@@ -68,7 +69,13 @@ function processNewQuestion($db)
 function fetchQuestion($db, $question_id)
 {
     try {
-        $question_query = "SELECT questions.*, users.username AS post_by FROM questions JOIN users ON questions.user_id = users.user_id WHERE questions.question_id =:question_id;";
+        $question_query = "SELECT questions.*, 
+        users.username AS post_by, 
+        modules.module_name AS module
+        FROM questions
+        JOIN users ON questions.user_id = users.user_id 
+        JOIN modules ON questions.module_id = modules.module_id
+        WHERE questions.question_id =:question_id;";
         $stmt = $db->prepare($question_query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->execute();
@@ -83,7 +90,24 @@ function fetchQuestion($db, $question_id)
         return false;
     }
 }
+function fetchQuestionByUserId($db, $user_id)
+{
+    try {
+        $question_query = "SELECT * FROM questions WHERE user_id = :user_id";
+        $stmt = $db->prepare($question_query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
 
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false; // No questions found for this user
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 function fetchRepliesForQuestion($db, $question_id)
 {
     try {
@@ -155,7 +179,9 @@ function saveEditedQuestion($db)
 
     if ($editedTitle && $editedContent) {
         // Update the question in the 'questions' table
-        $query = "UPDATE questions SET title = :editedTitle, content = :editedContent, module_id = :module_id WHERE question_id = :question_id";
+        $query = "UPDATE questions 
+                SET title = :editedTitle, content = :editedContent, module_id = :module_id 
+                WHERE question_id = :question_id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->bindParam(':editedTitle', $editedTitle);
@@ -170,5 +196,19 @@ function saveEditedQuestion($db)
         }
     } else {
         echo "Please fill in both title and content fields.";
+    }
+}
+
+function countQuestionsByUserId($db, $user_id)
+{
+    try {
+        $query = "SELECT COUNT(*) FROM questions WHERE user_id = :user_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
     }
 }

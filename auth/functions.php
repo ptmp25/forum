@@ -15,6 +15,7 @@ $username = "";
 $email = "";
 $errors = array();
 $success = "";
+$succeed = "";
 
 // Call the register() function if register_btn is clicked
 if (isset($_POST['register_btn'])) {
@@ -23,14 +24,20 @@ if (isset($_POST['register_btn'])) {
 
 function register()
 {
-    global $db, $errors, $username, $email, $success;
+    global $db, $errors, $username, $email, $success, $succeed;
 
     $username = e($_POST['username']);
     $email = e($_POST['email']);
     $password_1 = e($_POST['password_1']);
     $password_2 = e($_POST['password_2']);
-    $about = e($_POST['about']);
-    $profile_picture = uploadProfilePicture($_FILES['profile_picture']); // Handle file upload
+    if (isset($_POST['about'])) {
+        $role = e($_POST['about']);
+    }
+    if (isset($_FILES['profile_picture'])) {
+        $profile_picture = uploadProfilePicture($_FILES['profile_picture']); // Handle file upload
+    } else{
+        $profile_picture = "../img/profile_img/default_profile_img.png";
+    }
 
     if (isset($_POST['role'])) {
         $role = e($_POST['role']);
@@ -99,6 +106,7 @@ function register()
 
             $_SESSION['success'] = "New user successfully created!!";
             $success = "You have registered as $username. Now you can <a href='login.php'>Login</a>";
+            $succeed = "Created <em> $username </em> successful.";
             // header('Location: ../index.php');
         }
     }
@@ -169,6 +177,16 @@ function display_success()
     $success = "";
 }
 
+function display_succeed()
+{
+    global $succeed;
+    if ($succeed) {
+        echo '<div class="success">';
+        echo $succeed . '<br>';
+        echo '</div>';
+    }
+    $success = "";
+}
 function display_error()
 {
     global $errors;
@@ -211,7 +229,7 @@ if (isset($_POST['login_btn'])) {
 function login()
 {
     global $db, $username, $errors;
-
+    $errors = array();
     // Grab form values
     $username = e($_POST['username']);
     $password = e($_POST['password']);

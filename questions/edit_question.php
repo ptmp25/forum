@@ -46,7 +46,7 @@ if (isset($_POST['edit_question_btn'])) {
                 <label for="content">Content:</label>
                 <textarea name="content" rows="4" class="form-control" required><?php echo $question['content']; ?></textarea>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="image_url">Upload Image:</label>
                 <input type="file" name="image_url" accept="image/*" class="form-control-file">
                 <?php
@@ -55,7 +55,7 @@ if (isset($_POST['edit_question_btn'])) {
                 $stmt->execute();
                 $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 ?>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="module">Module: </label>
                 <select id="moduleSelect" name="module_id" value=""  class="form-control">
