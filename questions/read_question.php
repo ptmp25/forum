@@ -78,6 +78,7 @@ if (isset($_GET["question_id"])) {
             <div class="card mt-3">
                 <div class="card-body">
                     <p class="card-text">
+                        <strong>Question:</strong>
                         <?php echo $question["content"]; ?>
                     </p>
                     <?php if (!empty($question['image_url'])): ?>

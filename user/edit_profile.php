@@ -23,8 +23,6 @@ function updateProfilePicture($file)
         $targetDirectory = "../img/profile_img/"; // Directory where uploaded files will be stored
         $targetFile = $targetDirectory . basename($file['name']); // Full path to the uploaded file
 
-        $fileType = pathinfo($targetFile, PATHINFO_EXTENSION);
-
         // Check if the file is an image
         $check = getimagesize($file['tmp_name']);
         if ($check === false) {
@@ -124,14 +122,6 @@ if (isset($_POST['edit_profile_btn'])) {
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" value="<?php echo $user['email']; ?>">
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="password_1">Password</label>
-                        <input type="password" class="form-control" name="password_1">
-                    </div>
-                    <div class="form-group">
-                        <label for="password_2">Confirm password</label>
-                        <input type="password" class="form-control" name="password_2">
-                    </div> -->
                     <?php if (isAdmin()): ?>
                         <label for="role">User type</label>
                         <select name="role" id="role" class="form-control">
@@ -150,9 +140,9 @@ if (isset($_POST['edit_profile_btn'])) {
                         <img src="<?php echo $user['profile_picture']; ?>" alt="Profile Picture">
                     </div>
                     <div class="form-group">
-                        <label>Profile Picture:</label>
-                        <input type="file" class="file-form-control" name="profile_picture" accept="image/*"
-                            value="<?php echo $user['profile_picture']; ?>">
+                        <label>New Profile Picture:</label>
+                        <input type="file" class="file-form-control" name="profile_picture" accept="image/*">
+                            <!-- value="<?php echo $user['profile_picture']; ?>"> -->
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary register_btn" name="edit_profile_btn">Save</button>

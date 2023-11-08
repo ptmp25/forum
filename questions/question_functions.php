@@ -150,43 +150,66 @@ function deleteQuestion($db, $question_id)
     }
 }
 
+function uploadImages($files)
+{
+    $image_url = ''; // Initialize the image URL
+
+    if (isset($_FILES['image_url']) && is_array($_FILES['image_url']['name'])) {
+        $image_dir = '../img/question_img/';
+        $image_urls = array();
+        $max_image_count = 3; // Set your desired maximum number of images here
+
+        foreach ($_FILES['image_url']['name'] as $key => $name) {
+            if ($key < $max_image_count && $_FILES['image_url']['error'][$key] === UPLOAD_ERR_OK) {
+                $image_temp = $_FILES['image_url']['tmp_name'][$key];
+
+                $timestamp = time();
+                $image_name = $timestamp . '_' . $name;
+
+                $image_url = $image_dir . $image_name;
+
+                if (move_uploaded_file($image_temp, $image_url)) {
+                    // Image uploaded successfully
+                    $image_urls[] = $image_url;
+                } else {
+                    echo "Error: Failed to move the uploaded image.";
+                    exit();
+                }
+            }
+        }
+
+        $image_url = implode(',', $image_urls);
+    } else {
+        $image_url = null;
+    }
+    return $image_url;
+}
+
+
+
 function saveEditedQuestion($db)
 {
     $question_id = $_POST['question_id'];
     $editedTitle = $_POST['title'];
     $editedContent = $_POST['content'];
     $module_id = $_POST['module_id'];
-
-    // $image_url = ''; // Initialize the image URL
-
-    // if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
-    //     $image_dir = '../img/question_img/';
-    //     $image_name = $_FILES['image_url']['name'];
-    //     $image_temp = $_FILES['image_url']['tmp_name'];
-
-    //     $timestamp = time();
-    //     $image_name = $timestamp . '_' . $image_name;
-
-    //     $image_url = $image_dir . $image_name;
-
-    //     if (move_uploaded_file($image_temp, $image_url)) {
-    //         // Image uploaded successfully
-    //     } else {
-    //         echo "Error: Failed to move the uploaded image.";
-    //         exit();
-    //     }
-    // }
+    $image_url = uploadImages($_FILES['profile_picture']);
+    if ($image_url == null)
+    {
+        $image_url = $_POST['image'];
+    }
 
     if ($editedTitle && $editedContent) {
         // Update the question in the 'questions' table
         $query = "UPDATE questions 
-                SET title = :editedTitle, content = :editedContent, module_id = :module_id 
-                WHERE question_id = :question_id";
+                        SET title = :editedTitle, content = :editedContent, module_id = :module_id, image_url = :image_url
+                        WHERE question_id = :question_id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':question_id', $question_id);
         $stmt->bindParam(':editedTitle', $editedTitle);
         $stmt->bindParam(':module_id', $module_id);
         $stmt->bindParam(':editedContent', $editedContent);
+        $stmt->bindParam(':image_url', $image_url);
 
         if ($stmt->execute()) {
             header("Location: ../questions/read_question.php?question_id=$question_id");
@@ -194,10 +217,9 @@ function saveEditedQuestion($db)
         } else {
             echo "Error.";
         }
-    } else {
-        echo "Please fill in both title and content fields.";
     }
 }
+
 
 function countQuestionsByUserId($db, $user_id)
 {
