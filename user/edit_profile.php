@@ -155,11 +155,8 @@ if (isset($_POST['edit_profile_btn'])) {
                             value="<?php echo $user['profile_picture']; ?>">
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn register_btn" name="edit_profile_btn">Save</button>
+                        <button type="submit" class="btn btn-primary register_btn" name="edit_profile_btn">Save</button>
                     </div>
-                    <p>
-                        Already a member? <a href="login.php">Log in</a>
-                    </p>
             </form>
         </div>
     </div>
