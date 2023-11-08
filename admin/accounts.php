@@ -25,42 +25,44 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <div class="text-center">
-        <button class="btn btn-primary">
-            <a href="../admin/create_user.php">Create User</a>
-        </button>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
+    <main>
+        <div class="text-center">
+            <button class="btn btn-primary">
+                <a href="../admin/create_user.php">Create User</a>
+            </button>
+        </div>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        <a href="../user/profile.php?user_id=<?php echo $user['user_id']; ?>">
-                            <?= $user['username'] ?>
-                        </a>
-                    </td>
-                    <td>
-                        <?= $user['email'] ?>
-                    </td>
-                    <td>
-                        <?= $user['role'] ?>
-                    </td>
-                    <td>
-                        <form method="post" action="../auth/delete_user.php?user_id=<?php echo $user['user_id']; ?>">
-                            <input type="hidden" name="user_id" value=<?php echo $user['user_id']; ?>>
-                            <button type="submit" class="btn btn-danger" name="delete_user_btn">Delete</button>
-                        </form>
-                    </td>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td>
+                            <a href="../user/profile.php?user_id=<?php echo $user['user_id']; ?>">
+                                <?= $user['username'] ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?= $user['email'] ?>
+                        </td>
+                        <td>
+                            <?= $user['role'] ?>
+                        </td>
+                        <td>
+                            <form method="post" action="../auth/delete_user.php?user_id=<?php echo $user['user_id']; ?>">
+                                <input type="hidden" name="user_id" value=<?php echo $user['user_id']; ?>>
+                                <button type="submit" class="btn btn-danger" name="delete_user_btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </main>
 
 </html>

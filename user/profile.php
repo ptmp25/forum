@@ -22,7 +22,7 @@ $questions = fetchQuestionByUserId($db, $user_id);
 
 <body>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" style="margin-top: 90px;">
             <div class="card">
                 <div class="card-body">
                     <img src="<?php echo $user['profile_picture']; ?>" class="card-img-top" alt="Profile Image">
@@ -49,7 +49,7 @@ $questions = fetchQuestionByUserId($db, $user_id);
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-top: 90px;">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">About Me</h5>
