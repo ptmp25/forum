@@ -36,53 +36,57 @@ if (isset($_GET["module_id"])) {
 </head>
 
 <body>
-    <div class="page-name">
-        <h1>
-            Edit Question
-        </h1>
-    </div>
-    <div class="content-box container">
-        <form method="post" action="">
-            <input type="hidden" name="module_id" value="<?php echo $module['module_id']; ?>">
-            <div class="form-group">
-                <label for="module_name">Module name:</label>
-                <input type="text" name="module_name" class="form-control" value="<?php echo $module["module_name"]; ?>"
-                    required><br>
-            </div>
+    <main>
+        <div class="page-name">
+            <h1>
+                Edit Question
+            </h1>
+        </div>
+        <div class="content-box container">
+            <form method="post" action="">
+                <input type="hidden" name="module_id" value="<?php echo $module['module_id']; ?>">
+                <div class="form-group">
+                    <label for="module_name">Module name:</label>
+                    <input type="text" name="module_name" class="form-control"
+                        value="<?php echo $module["module_name"]; ?>" required><br>
+                </div>
 
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea name="description" class="form-control" rows="4"
-                    cols="50"><?php echo $module["description"]; ?></textarea><br>
-            </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea name="description" class="form-control" rows="4"
+                        cols="50"><?php echo $module["description"]; ?></textarea><br>
+                </div>
 
-            <input type="submit" name="edit_module_btn" value="Save" class="btn text-center">
-        </form>
-    </div>
-    <hr>
-    
-    <div class="list">
-        <ul>
-            <?php foreach ($questions as $question): ?>
-                <a href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
-                    <li>
-                        <?php echo $question["title"]; ?>
-                        <div class="d-flex try">
-                            <form method="post" onsubmit="return confirm('Are you sure you want to delete this question?');"
-                                action="../questions/delete_question.php">
-                                <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
-                                <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
-                                <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
-                                <button type="submit" name="delete_question_btn" class="btn btn-danger">Delete Question</button>
-                            </form>
-                            <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
-                                class="btn">Edit Question</a>
-                        </div>
-                    </li>
-                </a>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+                <input type="submit" name="edit_module_btn" value="Save" class="btn btn-primary text-center">
+            </form>
+        </div>
+        <hr>
+
+        <div class="list">
+            <ul>
+                <?php foreach ($questions as $question): ?>
+                    <a href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
+                        <li>
+                            <?php echo $question["title"]; ?>
+                            <div class="d-flex try">
+                                <form method="post"
+                                    onsubmit="return confirm('Are you sure you want to delete this question?');"
+                                    action="../questions/delete_question.php">
+                                    <input type="hidden" name="question_id" value="<?= $question['question_id'] ?>">
+                                    <input type="hidden" name="module_id" value="<?= $question['module_id'] ?>">
+                                    <input type="hidden" name="user_id" value="<?= $question['user_id'] ?>">
+                                    <button type="submit" name="delete_question_btn" class="btn btn-danger">Delete
+                                        Question</button>
+                                </form>
+                                <a href="../questions/edit_question.php?question_id=<?php echo $question["question_id"]; ?>"
+                                    class="btn btn-primary">Edit Question</a>
+                            </div>
+                        </li>
+                    </a>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </main>
 </body>
 
 </html>

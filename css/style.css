@@ -8,8 +8,6 @@
     text-align: center;
 }
 
-
-
 .container {
     width: 450px;
     margin-top: 90px;
@@ -130,10 +128,6 @@ a {
     margin-top: 30px;
 }
 
-.card {
-    margin-top: 15px;
-}
-
 .list li {
     width: 75%;
     border: none;
@@ -143,11 +137,12 @@ a {
     padding-inline-start: 0;
 }
 
-.card{
+.card {
     margin: 15px 10px;
 }
 
-.table , .email{
+.table,
+.email {
     width: 75%;
     margin: 10px auto;
 }
@@ -170,12 +165,12 @@ img {
     margin-bottom: 20px;
     text-align: justify;
 }
+
 header {
     display: flex;
     justify-content: space-between;
     /* align-items: center; */
     background-color: #001F3F;
-    padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     color: #e0e0e0;
 }
@@ -200,8 +195,6 @@ nav a:hover {
     color: #f2f2f2;
 }
 
-.btn {
-    background-color: #0074D9;
-    color: #f2f2f2;
-    margin: 10px;
+main {
+    margin-top: 90px;
 }
