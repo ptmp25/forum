@@ -40,6 +40,14 @@ $modules = getModules($db);
             <?php foreach ($modules as $module): ?>
                 <a href="modules/read_module.php?module_id=<?php echo $module['module_id']; ?>">
                     <li>
+                        <?php if (isAdmin()): ?>
+                            <form action="modules/delete_module.php" method="post" style="float: right;display: inline-block; "
+                                onsubmit="return confirm('Are you sure you want to delete this module?');">
+                                <input type="hidden" name="module_id" value="<?php echo $module['module_id']; ?>">
+                                <button type="submit" class="btn btn-danger" name="delete_module_btn">Delete Module
+                                </button>
+                            </form>
+                        <?php endif; ?>
                         <?php
                         echo $module['module_name'] . "<br>";
                         $module_id = $module['module_id'];
@@ -65,7 +73,7 @@ $modules = getModules($db);
                             echo $num_replies . " repl" . ($num_replies > 1 ? "ies" : "y");
                         }
                         if ($num_questions == 0 && $num_replies == 0) {
-                            echo "not question yet";
+                            echo "no question yet";
                         }
                         echo ")</em>";
                         ?>

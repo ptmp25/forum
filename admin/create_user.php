@@ -1,14 +1,14 @@
 <?php
-require '../auth/functions.php';
+require "../auth/functions.php";
 if (!isAdmin()) {
-    $_SESSION['msg'] = "You must log in first";
+    $_SESSION["msg"] = "You must log in first";
     $errors = "You must log in first";
-    header('location: ../auth/login.php');
+    header("location: ../auth/login.php");
 }
 
-if (isset($_GET['logout'])) {
+if (isset($_GET["logout"])) {
     session_destroy();
-    unset($_SESSION['user']);
+    unset($_SESSION["user"]);
     header("location: ../auth/login.php");
 }
 include(dirname(__DIR__) . "/templates/header.php");
@@ -45,9 +45,8 @@ include(dirname(__DIR__) . "/templates/header.php");
                     <div class="form-group">
                         <label for="role">User type</label>
                         <select name="role" id="role" class="form-control">
-                            <option value=""></option>
                             <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="user" selected="selected">User</option>
                         </select>
                     </div>
                     <div class="form-group">

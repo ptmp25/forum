@@ -66,7 +66,7 @@ if (isset($_GET["module_id"])) {
                 </div>
                 <div class="text-center">
                     <form action="../modules/delete_module.php" method="post"
-                        onsubmit="return confirm('Are you sure you want to delete this question?');">
+                        onsubmit="return confirm('Are you sure you want to delete this module?');">
                         <input type="hidden" name="module_id" value="<?php echo $module['module_id']; ?>">
                         <button type="submit" class="btn btn-danger" name="delete_module_btn">Delete Module
                         </button>
