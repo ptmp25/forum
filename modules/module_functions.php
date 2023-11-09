@@ -38,7 +38,11 @@ function getQuestionsForModule($db, $module_id)
 {
     try {
         // Fetch questions related to the selected module
-        $questions_query = "SELECT * FROM questions WHERE module_id = :module_id";
+        $questions_query = "SELECT q.*, u.username AS author, COUNT(r.question_id) AS num_replies FROM questions q 
+                    LEFT JOIN users u ON q.user_id = u.user_id 
+                    LEFT JOIN replies r ON q.question_id = r.question_id 
+                    WHERE q.module_id = :module_id 
+                    GROUP BY q.question_id";
         $stmt = $db->prepare($questions_query);
         $stmt->bindParam(':module_id', $module_id);
         $stmt->execute();

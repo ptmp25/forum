@@ -46,6 +46,13 @@ if (isset($_GET["module_id"])) {
                     <a href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
                         <li style="width: 75%;">
                             <?php echo $question["title"]; ?>
+                            <br>
+                            <small>
+                                Author:
+                                <?php echo $question["author"]; ?>
+                                Replies:
+                                <?php echo $question["num_replies"]; ?>
+                            </small>
                         </li>
                     </a>
                 <?php endforeach; ?>
