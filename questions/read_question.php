@@ -10,12 +10,20 @@ if (isset($_GET["question_id"])) {
     $question_id = $_GET["question_id"];
 
     $question = fetchQuestion($db, $question_id);
-    $replies = fetchRepliesForQuestion($db, $question_id);
 
     if ($question === false) {
         echo "Question not found";
         exit();
     }
+
+    // Pagination
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $replies_per_page = 5;
+    $replies_count = countRepliesForQuestion($db, $question_id);
+    $total_pages = ceil($replies_count / $replies_per_page);
+    $offset = ($page - 1) * $replies_per_page;
+
+    $replies = fetchRepliesForQuestion($db, $question_id, $offset, $replies_per_page);
 
     if ($replies === false) {
         echo "Error fetching replies";
@@ -125,6 +133,35 @@ if (isset($_GET["question_id"])) {
                     </li>
                 <?php endforeach; ?>
             </ul>
+
+            <!-- Pagination links -->
+            <?php if ($total_pages > 1): ?>
+                <div class="pagination justify-content-center">
+                    <ul class="pagination">
+                        <?php if ($page > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="?question_id=<?php echo $question_id; ?>&page=<?php echo $page - 1; ?>">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                                <a class="page-link" href="?question_id=<?php echo $question_id; ?>&page=<?php echo $i; ?>">
+                                    <?php echo $i; ?>
+                                </a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($page < $total_pages): ?>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="?question_id=<?php echo $question_id; ?>&page=<?php echo $page + 1; ?>">Next</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
             <!-- Add a reply form -->
             <h2 class="mt-3">Post a Reply</h2>

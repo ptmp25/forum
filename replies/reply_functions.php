@@ -78,4 +78,18 @@ function saveEditedReply($db){
     }
 
 }
+
+function countRepliesForQuestion($db, $question_id)
+{
+    try {
+        $query = "SELECT COUNT(*) FROM replies WHERE question_id = :question_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':question_id', $question_id);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 ?>

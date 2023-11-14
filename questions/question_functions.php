@@ -108,15 +108,22 @@ function fetchQuestionByUserId($db, $user_id)
         return false;
     }
 }
-function fetchRepliesForQuestion($db, $question_id)
+function fetchRepliesForQuestion($db, $question_id, $offset = null, $limit = null)
 {
     try {
         $replies_query = "SELECT replies.*, users.username AS replied_by
                   FROM replies 
                   JOIN users ON replies.user_id = users.user_id
                   WHERE replies.question_id = :question_id";
+        if ($offset !== null && $limit !== null) {
+            $replies_query .= " ORDER BY timestamp ASC LIMIT :offset, :limit";
+        }
         $stmt = $db->prepare($replies_query);
         $stmt->bindParam(':question_id', $question_id);
+        if ($offset !== null && $limit !== null) {
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -185,8 +192,7 @@ function saveEditedQuestion($db)
     $editedContent = $_POST['content'];
     $module_id = $_POST['module_id'];
     $image_url = uploadImages($_FILES['profile_picture']);
-    if ($image_url == null)
-    {
+    if ($image_url == null) {
         $image_url = $_POST['image'];
     }
 
