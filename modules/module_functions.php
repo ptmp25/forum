@@ -13,6 +13,17 @@ function getModules($db)
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+function countQuestionsForModule($db, $module_id)
+{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM questions WHERE module_id = ?");
+    $stmt->bind_param("i", $module_id);
+    $stmt->execute();
+    $count = 0;
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
+    return $count;
+}
 
 function getModuleDetails($db, $module_id)
 {
