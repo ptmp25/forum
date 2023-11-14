@@ -24,7 +24,7 @@ include(dirname(__DIR__) . "/templates/header.php");
     <main>
         <div class="header text-center">
             <h2>Admin - create user</h2>
-            <a href="../admin/accounts.php" class="btn btn-primary">Back to account page</a>
+            <a href="../admin/accounts.php" class="btn btn-primary">Back to account control page</a>
         </div>
         <div class="card container" style="margin: 10px auto;">
 
