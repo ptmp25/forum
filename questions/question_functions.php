@@ -125,15 +125,6 @@ function fetchRepliesForQuestion($db, $question_id)
     }
 }
 
-function isOwner($user_id)
-{
-    if ($_SESSION['user']['user_id'] == $user_id) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 // if (isset($_POST["delete_question_btn"]))
 function deleteQuestion($db, $question_id)
 {
