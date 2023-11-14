@@ -1,14 +1,14 @@
 <?php
-require '../auth/functions.php';
+require "../auth/functions.php";
 if (!isAdmin()) {
-    $_SESSION['msg'] = "You must log in first";
+    $_SESSION["msg"] = "You must log in first";
     $errors = "You must log in first";
-    header('location: ../auth/login.php');
+    header("location: ../auth/login.php");
 }
 
-if (isset($_GET['logout'])) {
+if (isset($_GET["logout"])) {
     session_destroy();
-    unset($_SESSION['user']);
+    unset($_SESSION["user"]);
     header("location: ../auth/login.php");
 }
 include(dirname(__DIR__) . "/templates/header.php");
@@ -24,7 +24,7 @@ include(dirname(__DIR__) . "/templates/header.php");
     <main>
         <div class="header text-center">
             <h2>Admin - create user</h2>
-            <a href="../admin/accounts.php" class="btn btn-primary">Back to account page</a>
+            <a href="../admin/accounts.php" class="btn btn-primary">Back to account control page</a>
         </div>
         <div class="card container" style="margin: 10px auto;">
 
@@ -45,9 +45,8 @@ include(dirname(__DIR__) . "/templates/header.php");
                     <div class="form-group">
                         <label for="role">User type</label>
                         <select name="role" id="role" class="form-control">
-                            <option value=""></option>
                             <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="user" selected="selected">User</option>
                         </select>
                     </div>
                     <div class="form-group">

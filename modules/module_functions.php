@@ -13,6 +13,13 @@ function getModules($db)
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+function countQuestionsForModule($db, $module_id)
+{
+    $stmt = $db->prepare("SELECT COUNT(*) AS question_count FROM questions WHERE module_id = :module_id");
+    $stmt->bindParam(':module_id', $module_id);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
 
 function getModuleDetails($db, $module_id)
 {
@@ -34,20 +41,21 @@ function getModuleDetails($db, $module_id)
     }
 }
 
-function getQuestionsForModule($db, $module_id)
+function getQuestionsForModule($db, $module_id, $offset, $limit)
 {
-    try {
-        // Fetch questions related to the selected module
-        $questions_query = "SELECT * FROM questions WHERE module_id = :module_id";
-        $stmt = $db->prepare($questions_query);
-        $stmt->bindParam(':module_id', $module_id);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        return false; // Error occurred
-    }
+    $questions_query = "SELECT q.*, u.username AS author, COUNT(r.question_id) AS num_replies FROM questions q 
+                            LEFT JOIN users u ON q.user_id = u.user_id 
+                            LEFT JOIN replies r ON q.question_id = r.question_id 
+                            WHERE q.module_id = :module_id 
+                            GROUP BY q.question_id
+                            LIMIT :offset, :limit";
+    $stmt = $db->prepare($questions_query);
+    $stmt->bindParam(':module_id', $module_id);
+    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 if (isset($_POST["new_module_btn"])) {
     createNewModule();

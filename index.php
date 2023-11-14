@@ -5,7 +5,16 @@ if (!isLoggedIn()) {
     header("Location: ../forum/auth/login.php");
 }
 
+$modulesPerPage = 5; // Change this to the desired number of modules per page
+
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$offset = ($page - 1) * $modulesPerPage;
+
 $modules = getModules($db);
+$totalModules = count($modules);
+$totalPages = $totalModules > 0 ? ceil($totalModules / $modulesPerPage) : 0;
+
+$modules = array_slice($modules, $offset, $modulesPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +49,14 @@ $modules = getModules($db);
             <?php foreach ($modules as $module): ?>
                 <a href="modules/read_module.php?module_id=<?php echo $module['module_id']; ?>">
                     <li>
+                        <?php if (isAdmin()): ?>
+                            <form action="modules/delete_module.php" method="post" style="float: right;display: inline-block; "
+                                onsubmit="return confirm('Are you sure you want to delete this module?');">
+                                <input type="hidden" name="module_id" value="<?php echo $module['module_id']; ?>">
+                                <button type="submit" class="btn btn-danger" name="delete_module_btn">Delete Module
+                                </button>
+                            </form>
+                        <?php endif; ?>
                         <?php
                         echo $module['module_name'] . "<br>";
                         $module_id = $module['module_id'];
@@ -65,7 +82,7 @@ $modules = getModules($db);
                             echo $num_replies . " repl" . ($num_replies > 1 ? "ies" : "y");
                         }
                         if ($num_questions == 0 && $num_replies == 0) {
-                            echo "not question yet";
+                            echo "no question yet";
                         }
                         echo ")</em>";
                         ?>
@@ -77,6 +94,40 @@ $modules = getModules($db);
         <?php if (isAdmin()) {
             echo "<div class=\" text-center\"><button class=\" btn btn-primary\"><a href='modules/create_module.php'>Create New Module</a><br></button></div>";
         } ?>
+
+        <div class="pagination justify-content-center">
+            <ul class="pagination">
+                <?php if ($page > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <?php if ($i == $page): ?>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                <?php echo $i; ?>
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                    <?php else: ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?php echo $i; ?>">
+                                <?php echo $i; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+
     </div>
 </body>
 

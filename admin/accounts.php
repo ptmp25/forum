@@ -1,10 +1,10 @@
 <?php
-require dirname(__DIR__) . '/modules/module_functions.php';
+require dirname(__DIR__) . "/modules/module_functions.php";
 
 if (!isAdmin()) {
-    $_SESSION['msg'] = "You must log in first";
+    $_SESSION["msg"] = "You must log in first";
     $errors = "You must log in first";
-    header('location: ../auth/login.php');
+    header("location: ../auth/login.php");
 }
 
 
@@ -43,19 +43,19 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($users as $user): ?>
                     <tr>
                         <td>
-                            <a href="../user/profile.php?user_id=<?php echo $user['user_id']; ?>">
-                                <?= $user['username'] ?>
+                            <a href="../user/profile.php?user_id=<?php echo $user["user_id"]; ?>">
+                                <?= $user["username"] ?>
                             </a>
                         </td>
                         <td>
-                            <?= $user['email'] ?>
+                            <?= $user["email"] ?>
                         </td>
                         <td>
-                            <?= $user['role'] ?>
+                            <?= $user["role"] ?>
                         </td>
                         <td>
-                            <form method="post" action="../auth/delete_user.php?user_id=<?php echo $user['user_id']; ?>">
-                                <input type="hidden" name="user_id" value=<?php echo $user['user_id']; ?>>
+                            <form method="post" action="../auth/delete_user.php?user_id=<?php echo $user["user_id"]; ?>">
+                                <input type="hidden" name="user_id" value=<?php echo $user["user_id"]; ?>>
                                 <button type="submit" class="btn btn-danger" name="delete_user_btn">Delete</button>
                             </form>
                         </td>

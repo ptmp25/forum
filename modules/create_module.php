@@ -33,7 +33,7 @@ if (!isAdmin()) {
                 <textarea name="description" class="form-control" rows="4" cols="50"></textarea><br>
             </div>
 
-            <input type="submit" name="new_module_btn" value="Create Module" class="btn text-center">
+            <input type="submit" name="new_module_btn" value="Create Module" class="btn btn-primary text-center">
         </form>
     </div>
 </body>

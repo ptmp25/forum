@@ -46,6 +46,7 @@ $questions = fetchQuestionByUserId($db, $user_id);
                         echo $stmt->fetchColumn();
                          ?>
                     </p>
+                    <!-- <button class="btn btn-primary"><a href="change_pass.php">Change Password</a></button> -->
                 </div>
             </div>
         </div>

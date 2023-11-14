@@ -35,7 +35,7 @@ function register()
     }
     if (isset($_FILES['profile_picture'])) {
         $profile_picture = uploadProfilePicture($_FILES['profile_picture']); // Handle file upload
-    } else{
+    } else {
         $profile_picture = "../img/profile_img/default_profile_img.png";
     }
 
@@ -215,7 +215,8 @@ if (isset($_GET['logout'])) {
     header("Location: ../auth/login.php");
 }
 
-function logout(){
+function logout()
+{
     session_destroy();
     unset($_SESSION['user']);
     header("Location: ../auth/login.php");
@@ -275,6 +276,15 @@ function login()
 function isAdmin()
 {
     if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isOwner($user_id)
+{
+    if ($_SESSION['user']['user_id'] == $user_id) {
         return true;
     } else {
         return false;

@@ -90,10 +90,11 @@ li a {
     text-align: left;
 }
 
-.try .btn {
+.try .btn, .btn {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     margin-inline: 10px;
+    margin-top: 10px;
 }
 
 .page-name .try .btn {
@@ -197,4 +198,8 @@ nav a:hover {
 
 main {
     margin-top: 90px;
+}
+
+.pagination{
+    margin-top: 10px;
 }

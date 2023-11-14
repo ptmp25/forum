@@ -39,7 +39,7 @@ if (isset($_GET["module_id"])) {
     <main>
         <div class="page-name">
             <h1>
-                Edit Question
+                Edit Module
             </h1>
         </div>
         <div class="content-box container">
