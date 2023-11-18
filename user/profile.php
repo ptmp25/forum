@@ -67,13 +67,13 @@ $questions = fetchQuestionByUserId($db, $user_id);
                             <?php
                             if ($questions)
                                 foreach ($questions as $question): ?>
-                                    <a
-                                        href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
-                                        <li>
-                                            <?php echo $question["title"]; ?>
-                                        </li>
-                                    </a>
-                                <?php endforeach; ?>
+                            <a
+                                href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
+                                <li>
+                                    <?php echo $question["title"]; ?>
+                                </li>
+                            </a>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
