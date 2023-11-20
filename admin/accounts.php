@@ -90,7 +90,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <ul class="pagination">
                 <?php if ($current_page > 1): ?>
                     <li class="page-item">
-                        <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
+                        <a class="page-link" href="?page=<?php echo $current_page - 1; ?>">Previous</a>
                     </li>
                 <?php endif; ?>
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>

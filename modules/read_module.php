@@ -32,16 +32,6 @@ if (isset($_GET["module_id"])) {
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>
-        <?php echo $module["module_name"]; ?>
-    </title>
-    <!-- <title><?php echo $module_id; ?></title> -->
-</head>
-
 <body>
     <main>
         <div class="page-name">

@@ -103,24 +103,27 @@ $stmt->execute();
                 <?php } ?>
             </tbody>
         </table>
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
             <?php if ($total_pages > 1) { ?>
                 <?php if ($current_page > 1) { ?>
-                    <li><a href="?page=<?php echo $current_page - 1; ?>">Previous</a></li>
+                    <li><a href="?page=<?php echo $current_page - 1; ?>" class="page-link">Previous</a></li>
                 <?php } ?>
                 <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
                     <?php if ($i == $current_page) { ?>
-                        <li class="active"><a href="#">
-                                <?php echo $i; ?>
+                        <li class="page-item active"><a href="#">
+                                <span class="page-link">
+                                    <?php echo $i; ?>
+                                    <span class="sr-only">(current)</span>
+                                </span>
                             </a></li>
                     <?php } else { ?>
-                        <li><a href="?page=<?php echo $i; ?>">
+                        <li><a class="page-link" href="?page=<?php echo $i; ?>">
                                 <?php echo $i; ?>
                             </a></li>
                     <?php } ?>
                 <?php } ?>
                 <?php if ($current_page < $total_pages) { ?>
-                    <li><a href="?page=<?php echo $current_page + 1; ?>">Next</a></li>
+                    <li><a class="page-link" href="?page=<?php echo $current_page + 1; ?>">Next</a></li>
                 <?php } ?>
             <?php } ?>
         </ul>
