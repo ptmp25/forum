@@ -7,9 +7,18 @@ if (!isAdmin()) {
 }
 if (isset($_GET["module_id"])) {
     $module_id = $_GET["module_id"];
+    $total_questions = countQuestionsForModule($db, $module_id);
 
+    // Calculate total number of pages
+    $total_pages = ceil($total_questions / 5);
+
+    // Get current page number
+    $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
+
+    // Calculate offset for current page
+    $offset = ($page - 1) * 5;
     $module = getModuleDetails($db, $module_id);
-    $questions = getQuestionsForModule($db, $module_id);
+    $questions = getQuestionsForModule($db, $module_id, $offset, 5);
 
     if ($module === false || $questions === false) {
         echo "Error fetching module details or questions";
@@ -86,6 +95,33 @@ if (isset($_GET["module_id"])) {
                 <?php endforeach; ?>
             </ul>
         </div>
+        <!-- Pagination links -->
+        <?php if ($total_pages > 1): ?>
+            <div class="pagination justify-content-center">
+                <?php if ($page > 1): ?>
+                    <a href="?module_id=<?php echo $module_id; ?>&page=<?php echo $page - 1; ?>" class="page-link">Previous</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <?php if ($i == $page): ?>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                <?php echo $i; ?>
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                    <?php else: ?>
+                        <a href="?module_id=<?php echo $module_id; ?>&page=<?php echo $i; ?>" class="page-link">
+                            <?php echo $i; ?>
+                        </a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($page < $total_pages): ?>
+                    <a href="?module_id=<?php echo $module_id; ?>&page=<?php echo $page + 1; ?>" class="page-link">Next</a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
     </main>
 </body>
 

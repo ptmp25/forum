@@ -73,7 +73,9 @@ $stmt->execute();
                 <?php while ($email = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr>
                         <td>
-                            <?php echo $email['send_by']; ?>
+                            <a href="../user/profile.php?user_id=<?php echo $email['user_id'] ?>">
+                                <?php echo $email['send_by']; ?>
+                            </a>
                         </td>
                         <td>
                             <?php echo $email['message_subject']; ?>
@@ -83,7 +85,7 @@ $stmt->execute();
                             $message = $email['message'];
                             if (strlen($message) > 100) {
                                 $short_message = substr($message, 0, 100) . '...';
-                                echo $short_message . '<a href="../emails/read_email.php?message_id=' . $email['message_id'] . '">See more</a>';
+                                echo $short_message . '<strong><a href="../emails/read_email.php?message_id=' . $email['message_id'] . '">See more</a></strong>';
                             } else {
                                 echo $message;
                             }
