@@ -67,15 +67,13 @@ function createNewModule()
 
     $module_name = $_POST["module_name"];
     $description = $_POST["description"];
-    $user_id = $_SESSION["user"]['user_id']; // Retrieve user ID from the session
 
     if ($module_name) {
         // Insert the new module into the 'modules' table
-        $query = "INSERT INTO modules (module_name, description, user_id) VALUES (:module_name, :description, :user_id)";
+        $query = "INSERT INTO modules (module_name, description) VALUES (:module_name, :description)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':module_name', $module_name);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':user_id', $user_id);
 
         if ($stmt->execute()) {
             header("Location: ../index.php"); // Redirect to the homepage after creating the module
