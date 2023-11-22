@@ -32,16 +32,6 @@ if (isset($_GET["module_id"])) {
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>
-        <?php echo $module["module_name"]; ?>
-    </title>
-    <!-- <title><?php echo $module_id; ?></title> -->
-</head>
-
 <body>
     <main>
         <div class="page-name">
@@ -81,9 +71,12 @@ if (isset($_GET["module_id"])) {
 
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                     <?php if ($i == $page): ?>
-                        <span class="page-link">
-                            <?php echo $i; ?>
-                        </span>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                <?php echo $i; ?>
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
                     <?php else: ?>
                         <a href="?module_id=<?php echo $module_id; ?>&page=<?php echo $i; ?>" class="page-link">
                             <?php echo $i; ?>

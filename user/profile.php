@@ -28,10 +28,9 @@ $questions = fetchQuestionByUserId($db, $user_id);
                     <img src="<?php echo $user['profile_picture']; ?>" class="card-img-top" alt="Profile Image">
                     <h5 class="card-title">
                         <?php echo $user['username']; 
-                        // if (!($_SESSION['user']['user_id'] == $user_id) && !isAdmin())
-                        //     {echo "<em><a href=\"edit_profile.php?user_id=" . $user['user_id'] . ">Edit profile</a></em>";}
-                        // ?>
-                        <em><a href="edit_profile.php?user_id=<?php echo $user['user_id']; ?>">Edit profile</a></em>
+                        if (($_SESSION['user']['user_id'] == $user_id) || isAdmin())
+                            {echo "<em><a href=\"edit_profile.php?user_id=" . $user['user_id'] . "\">  Edit profile</a></em>";}
+                        ?>
                     </h5>
                     <p class="card-text">
                         <em>(<?php echo $user['role']; ?>)</em>
@@ -67,13 +66,13 @@ $questions = fetchQuestionByUserId($db, $user_id);
                             <?php
                             if ($questions)
                                 foreach ($questions as $question): ?>
-                                    <a
-                                        href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
-                                        <li>
-                                            <?php echo $question["title"]; ?>
-                                        </li>
-                                    </a>
-                                <?php endforeach; ?>
+                            <a
+                                href="../questions/read_question.php?question_id=<?php echo $question["question_id"]; ?>">
+                                <li>
+                                    <?php echo $question["title"]; ?>
+                                </li>
+                            </a>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

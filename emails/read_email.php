@@ -42,27 +42,28 @@ if (isset($_POST['delete'])) {
 </head>
 
 <body>
-    <div class="container email">
-        <h1>
-            <?php echo $email['message_subject']; ?>
-        </h1>
-        <p>From:
-            <?php echo $email['send_by']; ?>
-        </p>
-        <p>Date:
-            <?php echo $email['timestamp']; ?>
-        </p>
-        <div class="message-body">
-            <p>
-
-                <?php echo $email['message']; ?>
+    <main>
+        <div class="container email">
+            <h1>
+                <?php echo $email['message_subject']; ?>
+            </h1>
+            <p>From:
+                <?php echo $email['send_by']; ?>
             </p>
+            <p>Date:
+                <?php echo $email['timestamp']; ?>
+            </p>
+            <div class="message-body">
+                <p>
+                    <?php echo $email['message']; ?>
+                </p>
+            </div>
+            <form method="post" action="../emails/delete_message.php?message_id=<?php echo $email['message_id']; ?>">
+                <input type="hidden" name="message_id" value=<?php echo $email['message_id']; ?>>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
         </div>
-        <form method="post" action="../emails/delete_message.php?message_id=<?php echo $email['message_id']; ?>">
-            <input type="hidden" name="message_id" value=<?php echo $email['message_id']; ?>>
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-    </div>
+    </main>
 </body>
 
 </html>

@@ -107,12 +107,12 @@ if (isset($_GET["question_id"])) {
                 <?php foreach ($replies as $reply): ?>
                     <li class="list-group-item">
                         <div class="d-flex justify-content-between">
-                            <p class="mb-1"><em> By:
+                            <p class="mb-1"> By:
                                     <a href="../user/profile.php?user_id=<?php echo $reply['user_id']; ?>">
-                                        <?php echo $reply['replied_by']; ?>
-                                    </a> on
+                                        <em><?php echo $reply['replied_by']; ?></em>
+                                        </a> on
                                     <?php echo $reply['timestamp']; ?>
-                                </em></p>
+                                </p>
                         </div>
                         <p class="mb-1">
                             <?php echo $reply['reply_content']; ?>
