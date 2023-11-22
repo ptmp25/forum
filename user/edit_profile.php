@@ -126,9 +126,18 @@ if (isset($_POST['edit_profile_btn'])) {
                         <?php if (isAdmin()): ?>
                             <label for="role">User type</label>
                             <select name="role" id="role" class="form-control">
-                                <option value=""></option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
+                                <option value="admin" <?php
+                                    //set the default value if create question for module page 
+                                    if ($user['role'] == 'admin') {
+                                        echo "selected='selected'";
+                                    }
+                                    ?>>Admin</option>
+                                <option value="user" <?php
+                                    //set the default value if create question for module page 
+                                    if ($user['role'] == 'user') {
+                                        echo "selected='selected'";
+                                    }
+                                    ?>>User</option>
                             </select>
                         <?php endif; ?>
                         <div class="form-group">

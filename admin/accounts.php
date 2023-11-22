@@ -45,6 +45,9 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <main>
+        <div class="page-name">
+            <strong>Account Control</strong>
+        </div>
         <div class="text-center">
             <button class="btn btn-primary">
                 <a href="../admin/create_user.php">Create User</a>

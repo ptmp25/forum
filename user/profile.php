@@ -28,10 +28,9 @@ $questions = fetchQuestionByUserId($db, $user_id);
                     <img src="<?php echo $user['profile_picture']; ?>" class="card-img-top" alt="Profile Image">
                     <h5 class="card-title">
                         <?php echo $user['username']; 
-                        // if (!($_SESSION['user']['user_id'] == $user_id) && !isAdmin())
-                        //     {echo "<em><a href=\"edit_profile.php?user_id=" . $user['user_id'] . ">Edit profile</a></em>";}
-                        // ?>
-                        <em><a href="edit_profile.php?user_id=<?php echo $user['user_id']; ?>">Edit profile</a></em>
+                        if (($_SESSION['user']['user_id'] == $user_id) || isAdmin())
+                            {echo "<em><a href=\"edit_profile.php?user_id=" . $user['user_id'] . "\">  Edit profile</a></em>";}
+                        ?>
                     </h5>
                     <p class="card-text">
                         <em>(<?php echo $user['role']; ?>)</em>
