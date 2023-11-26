@@ -202,11 +202,7 @@ function display_error()
 
 function isLoggedIn()
 {
-    if (isset($_SESSION['user'])) {
-        return true;
-    } else {
-        return false;
-    }
+    return (isset($_SESSION['user'])) ;
 }
 
 if (isset($_GET['logout'])) {
@@ -221,6 +217,7 @@ function logout()
     unset($_SESSION['user']);
     header("Location: ../auth/login.php");
 }
+
 // Call the login() function if login_btn is clicked
 if (isset($_POST['login_btn'])) {
     login();
@@ -260,7 +257,7 @@ function login()
                 $_SESSION['success'] = "You are now logged in";
 
                 if ($user['user_type'] == 'admin') {
-                    header('Location: ../home.php');
+                    header('Location: ../admin/home.php');
                 } else {
                     header('Location: ../index.php');
                 }
@@ -275,18 +272,10 @@ function login()
 
 function isAdmin()
 {
-    if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') {
-        return true;
-    } else {
-        return false;
-    }
+    return (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin');
 }
 
 function isOwner($user_id)
 {
-    if ($_SESSION['user']['user_id'] == $user_id) {
-        return true;
-    } else {
-        return false;
-    }
+    return ($_SESSION['user']['user_id'] == $user_id);
 }
