@@ -117,7 +117,7 @@ function uploadProfilePicture($file)
     global $errors;
 
     if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
-        $targetDirectory = "../img/profile_img/"; // Directory where uploaded files will be stored
+        $targetDirectory = "/img/profile_img/"; // Directory where uploaded files will be stored
         $targetFile = $targetDirectory . basename($file['name']); // Full path to the uploaded file
 
         $fileType = pathinfo($targetFile, PATHINFO_EXTENSION);

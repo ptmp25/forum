@@ -96,7 +96,8 @@ $stmt->execute();
                         </td>
                         <td>
                             <form method="post"
-                                action="../emails/delete_message.php?message_id=<?php echo $email['message_id']; ?>">
+                                action="../emails/delete_message.php?message_id=<?php echo $email['message_id']; ?>"
+                                onsubmit="return confirm('Are you sure you want to delete this mail?');">
                                 <input type="hidden" name="message_id" value=<?php echo $email['message_id']; ?>>
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>

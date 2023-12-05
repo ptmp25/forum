@@ -4,11 +4,11 @@
 require_once '../auth/functions.php';
 
 // Test case 1: Register with valid inputs
-$_POST['username'] = 'john_doe';
-$_POST['email'] = 'john@example.com';
+$_POST['username'] = 'phuong';
+$_POST['email'] = 'phuong@email.com';
 $_POST['password_1'] = 'password123';
 $_POST['password_2'] = 'password123';
-$_POST['about'] = 'About John Doe';
+$_POST['about'] = 'About Phuong';
 $_FILES['profile_picture'] = [
     'name' => 'profile_picture.jpg',
     'type' => 'image/jpeg',

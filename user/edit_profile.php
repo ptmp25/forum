@@ -26,7 +26,6 @@ function updateProfilePicture($file)
         // Check if the file is an image
         $check = getimagesize($file['tmp_name']);
         if ($check === false) {
-            array_push($errors, "File is not an image.");
             return null;
         }
 
