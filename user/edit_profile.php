@@ -43,7 +43,7 @@ function updateProfilePicture($file)
             return null;
         }
     } else {
-        // Return the default profile picture path
+        // Return the old profile picture path
         return $user['profile_picture'];
     }
 }

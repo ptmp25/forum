@@ -25,8 +25,8 @@ if ($_GET['module_id']) {
         <div class=" content-box container">
             <form method="post" enctype="multipart/form-data" class="form">
                 <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" name="title" class="form-control" required>
+                    <label for="title">Title (less than 255 characters):</label>
+                    <input type="text" name="title" class="form-control" required maxlength="255">
                 </div>
                 <div class="form-group">
                     <label for="content">Content:</label>

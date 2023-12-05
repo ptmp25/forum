@@ -65,7 +65,7 @@ function createNewModule()
 {
     global $db;
 
-    $module_name = $_POST["module_name"];
+    $module_name = trim($_POST["module_name"]);
     $description = $_POST["description"];
 
     if ($module_name) {

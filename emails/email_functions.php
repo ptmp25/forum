@@ -11,15 +11,17 @@ function sendEmail()
 
     // $email = $_POST["email"];
     $user_id = $_POST["user_id"];
-    $message_subject = $_POST["message_subject"];
-    $message = $_POST["message"];
+    $message_subject = trim($_POST["message_subject"]);
+    $message = trim($_POST["message"]);
 
-    $query = "INSERT INTO messages (user_id, message_subject, message) 
-    VALUES (:user_id, :message_subject, :message)";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':user_id', $user_id);
-    $stmt->bindParam(':message_subject', $message_subject);
-    $stmt->bindParam(':message', $message);
-    $stmt->execute();
-    header("Location: ../emails/succeed.php");
+    if (!empty($message) || !empty($message_subject)) {
+        $query = "INSERT INTO messages (user_id, message_subject, message) 
+        VALUES (:user_id, :message_subject, :message)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':message_subject', $message_subject);
+        $stmt->bindParam(':message', $message);
+        $stmt->execute();
+        header("Location: ../emails/succeed.php");
+    }
 }

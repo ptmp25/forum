@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_question_btn']))
 
 function processNewQuestion($db)
 {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
+    $title = trim($_POST['title']);
+    $content = trim($_POST['content']);
     $user_id = $_SESSION['user']['user_id'];
     $module_id = $_POST['module_id'];
 
