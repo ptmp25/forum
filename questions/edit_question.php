@@ -1,23 +1,21 @@
 <?php
 // Include your database connection code here
-require dirname(__DIR__) . '/questions/question_functions.php';
+require dirname(__DIR__).'/questions/question_functions.php';
 
 $question_id = $_GET['question_id'];
 $question = fetchQuestion($db, $question_id);
-if (!$question) {
+if(!$question) {
     echo "Question not found.";
 }
 $user_id = $question['user_id'];
 $module_id = $question['module_id'];
 
 // Check if the user is the owner of the question or an admin
-if (isOwner($user_id) || isAdmin()) {
-
-} else {
-    echo "You are not authorized to edit this question.";
+if(!(isOwner($user_id) || isAdmin())) {
+    header("Location: ../index.php");
 }
 
-if (isset($_POST['edit_question_btn'])) {
+if(isset($_POST['edit_question_btn'])) {
     saveEditedQuestion($db);
 }
 ?>
@@ -50,11 +48,11 @@ if (isset($_POST['edit_question_btn'])) {
                 </div>
                 <div class="form-group">
                     <label for="image">Current image:</label>
-                    <?php if (!empty($question['image_url'])): ?>
+                    <?php if(!empty($question['image_url'])): ?>
                         <div class="image-container">
                             <?php
                             $images = explode(",", $question["image_url"]);
-                            foreach ($images as $image): ?>
+                            foreach($images as $image): ?>
                                 <img src="<?php echo $image; ?>" alt="Question Image" class="img-fluid">
                             <?php endforeach; ?>
                         </div>
@@ -70,10 +68,10 @@ if (isset($_POST['edit_question_btn'])) {
                     <select id="moduleSelect" name="module_id" value="" class="form-control">
                         <?php
                         $modules = getModules($db);
-                        foreach ($modules as $module): ?>
+                        foreach($modules as $module): ?>
                             <option value="<?php echo $module['module_id']; ?>" <?php
                                //set the default value if create question for module page 
-                               if ($question['module_id'] == $module['module_id']) {
+                               if($question['module_id'] == $module['module_id']) {
                                    echo "selected='selected'";
                                }
                                ?>>

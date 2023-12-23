@@ -8,7 +8,10 @@ $APPURL = "http://localhost:80/forum";
     <title>Forum</title>
     <!-- link bootstrap framework  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo $APPURL; ?>/css/style.css">
+    <link id="style-link" rel="stylesheet" type="text/css"
+        href="<?php echo $APPURL; ?>/css/style.css">
+
+
 </head>
 
 <body>
@@ -19,13 +22,14 @@ $APPURL = "http://localhost:80/forum";
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $APPURL; ?>/index.php">Home</a>
-                    </li> 
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $APPURL; ?>/emails/create_email.php">Contact us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="<?php echo $APPURL; ?>/user/profile.php?user_id=<?php echo $_SESSION['user']['user_id'] ?>">My Account</a>
+                            href="<?php echo $APPURL; ?>/user/profile.php?user_id=<?php echo $_SESSION['user']['user_id'] ?>">My
+                            Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $APPURL; ?>/index.php?logout='1">Logout</a>
@@ -36,6 +40,15 @@ $APPURL = "http://localhost:80/forum";
                         <a class=\"nav-link\" href=\"$APPURL/admin/home.php\">Admin Panel</a>";
                     }
                     ?>
+                    <button onclick="toggleStyle()">Toggle Style</button>
+                    <script>
+                        function toggleStyle() {
+                            var styleLink = document.getElementById('style-link');
+                            var currentStyle = styleLink.getAttribute('href');
+                            var newStyle = currentStyle.includes('dark') ? 'style.css' : 'dark-style.css';
+                            styleLink.setAttribute('href', '<?php echo $APPURL; ?>/css/' + newStyle);
+                        }
+                    </script>
                 </ul>
             </div>
         </nav>
